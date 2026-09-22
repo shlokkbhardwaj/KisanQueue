@@ -32,7 +32,9 @@
     var sameMachine = (loc.protocol === 'http:' || loc.protocol === 'https:') &&
       (loc.hostname === 'localhost' || loc.hostname === '127.0.0.1');
     // Talk to the backend on the same host name the page was opened with (localhost vs 127.0.0.1).
-    return 'http://' + (sameMachine ? loc.hostname : 'localhost') + ':5000/api';
+    return sameMachine
+  ? 'http://' + loc.hostname + ':5000/api'
+  : 'https://kisanqueue-jcgb.onrender.com/api';
   }
   KQ.API_BASE = resolveApiBase();
 
