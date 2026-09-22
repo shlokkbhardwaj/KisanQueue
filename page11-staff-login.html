@@ -908,7 +908,7 @@ body:has(.kq-login-brand) .field-panel { padding-top: 7.2rem !important; }
 </div>
 </div>
 <script>
-  const API_BASE = (window.KQ_API_BASE || ('http://' + (location.hostname || 'localhost') + ':5000/api')).replace(/\/+$/, '');
+  const API_BASE = (window.KQ_API_BASE || (((location.protocol === 'http:' || location.protocol === 'https:') && (location.hostname === 'localhost' || location.hostname === '127.0.0.1')) ? ('http://' + location.hostname + ':5000/api') : 'https://kisanqueue-jcgb.onrender.com/api')).replace(/\/+$/, '');
   let selectedRole = null;
   const roleCards = document.querySelectorAll('.role-card');
   const submitBtn = document.getElementById('submitBtn'); const btnLabel = document.getElementById('btnLabel');
