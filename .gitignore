@@ -1,0 +1,13 @@
+# secrets - NEVER commit
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# dependencies / logs / OS
+node_modules/
+npm-debug.log*
+.DS_Store
+Thumbs.db

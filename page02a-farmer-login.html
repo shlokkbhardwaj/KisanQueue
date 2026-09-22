@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Login - Kisan Queue Farmer Queue</title>
+    <link rel="stylesheet" href="voice-assistant.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Inter, Arial, sans-serif; background: #f7f8fa; color: #172033; min-height: 100vh; }
+        .topbar { min-height: 72px; background: #fff; border-bottom: 1px solid #e7e9ee; display: flex; align-items: center;
+            justify-content: space-between; padding: 8px 40px; gap: 12px; }
+        .topbar img { height: 48px; width: auto; display: block; }
+        .back-link { font-size: 13px; color: #5b667a; text-decoration: none; }
+        main { max-width: 480px; margin: 0 auto; padding: 40px 20px 60px; }
+        .card { background: #fff; border: 1px solid #e5e8ed; border-radius: 16px; padding: 30px; }
+        h1 { font-size: 24px; margin-bottom: 6px; }
+        .card-description { color: #5f6b7f; font-size: 14px; margin-bottom: 24px; line-height: 1.5; }
+        .form-group { display: flex; flex-direction: column; margin-bottom: 18px; }
+        label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+        input[type="tel"], input[type="password"], input[type="text"] {
+            width: 100%; padding: 13px 14px; border: 1px solid #d9dee6; border-radius: 9px; background: #fff;
+            color: #172033; font-size: 16px; outline: none; transition: border .2s, box-shadow .2s; }
+        input:focus { border-color: #176b4d; box-shadow: 0 0 0 3px rgba(23,107,77,.12); }
+        input.error { border-color: #d44a4a; }
+        .password-wrap { position: relative; }
+        .password-wrap input { padding-right: 78px; }
+        .toggle-password { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: transparent;
+            border: 0; color: #176b4d; font-weight: 700; font-size: 13px; padding: 8px 10px; cursor: pointer; border-radius: 7px; }
+        .toggle-password:hover { background: #eef6f2; }
+        .field-error { color: #c23b3b; font-size: 12px; margin-top: 6px; min-height: 15px; }
+        .remember { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 20px; }
+        .remember input { width: 18px; height: 18px; accent-color: #176b4d; }
+        .alert { display: none; padding: 12px 14px; border-radius: 9px; font-size: 14px; margin-bottom: 18px; line-height: 1.45; }
+        .alert.show { display: block; }
+        .alert.error { background: #fff3f3; color: #a83232; border: 1px solid #f3c9c9; }
+        .alert.info { background: #f3f7f5; color: #176b4d; border: 1px solid #d3e6dd; }
+        button.primary { width: 100%; border: none; border-radius: 9px; padding: 14px 20px; font-size: 15px; font-weight: 800;
+            cursor: pointer; background: #176b4d; color: #fff; min-height: 48px; }
+        button.primary:hover { background: #12563e; }
+        button.primary:disabled { opacity: .6; cursor: not-allowed; }
+        button:focus-visible, a:focus-visible { outline: 3px solid #c9962c; outline-offset: 2px; }
+        .switch { text-align: center; font-size: 14px; color: #5f6b7f; margin-top: 22px; line-height: 1.6; }
+        .switch a { color: #176b4d; font-weight: 700; }
+        @media (max-width: 560px) {
+            .topbar { padding: 8px 16px; }
+            main { padding: 24px 14px 48px; }
+            .card { padding: 22px 18px; }
+        }
+    </style>
+<link rel="stylesheet" href="hindi-i18n.css">
+  <script src="hindi-i18n.js"></script>
+</head>
+<body>
+    <div class="topbar">
+        <a href="page01-landing.html" aria-label="Farmer Queue home"><img src="farmer-queue.png" alt="Farmer Queue"></a>
+        <a class="back-link" href="page01-landing.html">← Back home</a>
+    </div>
+
+    <main>
+        <div class="card">
+            <h1>Farmer login</h1>
+            <p class="card-description">Log in with your mobile number and password to book a slot, see your token and check the queue.</p>
+
+            <div id="loginAlert" class="alert" role="alert" aria-live="assertive"></div>
+
+            <form id="loginForm" novalidate autocomplete="on">
+                <div class="form-group">
+                    <label for="mobile">Mobile number</label>
+                    <input id="mobile" name="mobile" type="tel" inputmode="numeric" autocomplete="username" maxlength="10"
+                           placeholder="10-digit mobile number" required>
+                    <div class="field-error" id="mobileError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-wrap">
+                        <input id="password" name="password" type="password" autocomplete="current-password"
+                               maxlength="128" placeholder="Enter your password" required>
+                        <button type="button" class="toggle-password" id="togglePassword" aria-pressed="false"
+                                aria-controls="password">Show</button>
+                    </div>
+                    <div class="field-error" id="passwordError"></div>
+                </div>
+
+                <label class="remember" for="remember">
+                    <input id="remember" type="checkbox" checked>
+                    Keep me logged in on this device
+                </label>
+
+                <button type="submit" class="primary" id="loginBtn">Log in</button>
+            </form>
+
+            <p class="switch">
+                New to Kisan Queue? <a href="page02-farmer-registration.html">Create an account</a><br>
+                Forgot your password? Please contact your procurement centre or helpline to have it reset.
+            </p>
+        </div>
+    </main>
+
+    <script src="kq-app.js"></script>
+    <script>
+    (function () {
+        'use strict';
+
+        var form = document.getElementById('loginForm');
+        var mobile = document.getElementById('mobile');
+        var password = document.getElementById('password');
+        var alertBox = document.getElementById('loginAlert');
+        var button = document.getElementById('loginBtn');
+
+        // Already logged in? Go straight on.
+        if (KQ.isLoggedIn()) {
+            location.replace(KQ.nextPage());
+            return;
+        }
+
+        function showAlert(message, kind) {
+            alertBox.textContent = message;
+            alertBox.className = 'alert show ' + (kind || 'error');
+        }
+
+        function setFieldError(input, errorId, message) {
+            document.getElementById(errorId).textContent = message || '';
+            input.classList.toggle('error', !!message);
+        }
+
+        if (new URLSearchParams(location.search).get('expired') === '1') {
+            showAlert('Your session has ended. Please log in again.', 'info');
+        }
+
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            var visible = password.type === 'text';
+            password.type = visible ? 'password' : 'text';
+            this.textContent = visible ? 'Show' : 'Hide';
+            this.setAttribute('aria-pressed', String(!visible));
+        });
+
+        mobile.addEventListener('input', function () {
+            mobile.value = mobile.value.replace(/\D/g, '').slice(0, 10);
+            setFieldError(mobile, 'mobileError', '');
+        });
+        password.addEventListener('input', function () { setFieldError(password, 'passwordError', ''); });
+
+        function validate() {
+            var ok = true;
+            if (!/^[6-9]\d{9}$/.test(mobile.value)) {
+                setFieldError(mobile, 'mobileError', 'Enter a valid 10-digit mobile number.');
+                ok = false;
+            }
+            if (!password.value) {
+                setFieldError(password, 'passwordError', 'Enter your password.');
+                ok = false;
+            }
+            return ok;
+        }
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            alertBox.className = 'alert';
+            if (!validate()) return;
+
+            button.disabled = true;
+            button.textContent = 'Logging in…';
+
+            KQ.api('/auth/login', {
+                method: 'POST',
+                auth: false,
+                body: { mobile: mobile.value, password: password.value }
+            }).then(function (res) {
+                KQ.saveSession(res.data, document.getElementById('remember').checked);
+                password.value = '';                       // never keep the password around
+                location.replace(KQ.nextPage());
+            }).catch(function (err) {
+                password.value = '';
+                if (err.status === 401) showAlert('Wrong mobile number or password. Please check and try again.');
+                else if (err.status === 429) showAlert('Too many attempts. Please wait a few minutes and try again.');
+                else showAlert(KQ.describeError(err, 'log in'));
+                button.disabled = false;
+                button.textContent = 'Log in';
+                password.focus();
+            });
+        });
+    })();
+    </script>
+</body>
+</html>
