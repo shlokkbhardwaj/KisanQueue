@@ -389,3 +389,149 @@
   KQ.LOGIN_PAGE = LOGIN_PAGE;
   global.KQ = KQ;
 })(window);
+
+/* KQ header controls: keep language selector and account/logout controls separated. */
+(function () {
+  var style = document.createElement('style');
+  style.textContent = `
+    .header-right,
+    .topbar .header-right,
+    header .header-right {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+      gap: 12px !important;
+      flex-wrap: wrap !important;
+      min-width: 0 !important;
+    }
+
+    .header-right .lang-select,
+    .header-right #languageSelect,
+    .header-right #langSelect {
+      flex: 0 0 auto !important;
+      position: relative !important;
+      z-index: 2 !important;
+    }
+
+    .header-right .kq-auth-chip {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      flex: 0 0 auto !important;
+      margin-left: 0 !important;
+      position: relative !important;
+      z-index: 3 !important;
+    }
+
+    @media (max-width: 720px) {
+      .header-right,
+      .topbar .header-right,
+      header .header-right {
+        gap: 8px !important;
+        row-gap: 6px !important;
+      }
+
+      .header-right .kq-auth-chip {
+        margin-left: 0 !important;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+})();
+
+/* FINAL MOBILE HEADER FIX: language + logout must never overlap */
+(function () {
+  var style = document.createElement('style');
+  style.textContent = `
+    @media (max-width: 720px) {
+      header,
+      .topbar {
+        height: auto !important;
+        min-height: 64px !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        row-gap: 8px !important;
+        overflow: visible !important;
+      }
+
+      header .header-right,
+      .topbar .header-right {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 1 1 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        margin: 0 !important;
+        padding: 4px 0 !important;
+        position: static !important;
+      }
+
+      header .lang-select,
+      header #langSelect,
+      header #languageSelect,
+      .topbar .lang-select,
+      .topbar #langSelect,
+      .topbar #languageSelect {
+        position: static !important;
+        float: none !important;
+        flex: 0 1 auto !important;
+        max-width: 145px !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+      }
+
+      .kq-auth-chip {
+        position: static !important;
+        float: none !important;
+        flex: 0 0 auto !important;
+        margin: 0 !important;
+        transform: none !important;
+      }
+
+      .kq-logout-btn {
+        position: static !important;
+        margin: 0 !important;
+        white-space: nowrap !important;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+})();
+
+/* MOBILE: move language selector to a fixed bottom-left position */
+(function () {
+  var style = document.createElement('style');
+  style.textContent = `
+    @media (max-width: 720px) {
+      .lang-select,
+      #langSelect,
+      #languageSelect {
+        position: fixed !important;
+        left: 12px !important;
+        bottom: 12px !important;
+        top: auto !important;
+        right: auto !important;
+        z-index: 10050 !important;
+        width: auto !important;
+        min-width: 105px !important;
+        max-width: 150px !important;
+        margin: 0 !important;
+        transform: none !important;
+        box-sizing: border-box !important;
+      }
+
+      .kq-auth-chip {
+        position: static !important;
+        margin: 0 !important;
+      }
+
+      .kq-logout-btn {
+        position: static !important;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+})();
