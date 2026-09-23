@@ -1027,5 +1027,232 @@ body:has(.kq-login-brand) .field-panel{
     console.warn('voice-assistant.js did not load — make sure it is in the same folder as this page.');
   }
 </script>
+  <!-- KISAN QUEUE - TODAY'S MARKET PRICES -->
+
+<section id="today-market-prices" class="kq-market-prices">
+  <div class="kq-market-prices-inner">
+
+```
+<div class="kq-market-heading">
+  <div>
+    <span class="kq-market-eyebrow">MANDI MARKET</span>
+    <h2>Today's Market Prices</h2>
+    <p>Check indicative crop prices before planning your visit.</p>
+  </div>
+
+  <span class="kq-market-date" id="marketPriceDate">
+    Updated today
+  </span>
+</div>
+
+<div class="kq-price-grid" id="kqPriceGrid">
+
+  <article class="kq-price-card">
+    <div class="kq-price-crop">🌾 Wheat</div>
+    <div class="kq-price-value">₹2,425</div>
+    <div class="kq-price-unit">per quintal</div>
+  </article>
+
+  <article class="kq-price-card">
+    <div class="kq-price-crop">🍚 Rice</div>
+    <div class="kq-price-value">₹2,310</div>
+    <div class="kq-price-unit">per quintal</div>
+  </article>
+
+  <article class="kq-price-card">
+    <div class="kq-price-crop">🌽 Maize</div>
+    <div class="kq-price-value">₹2,250</div>
+    <div class="kq-price-unit">per quintal</div>
+  </article>
+
+  <article class="kq-price-card">
+    <div class="kq-price-crop">🌱 Gram</div>
+    <div class="kq-price-value">₹5,650</div>
+    <div class="kq-price-unit">per quintal</div>
+  </article>
+
+  <article class="kq-price-card">
+    <div class="kq-price-crop">🫘 Lentil</div>
+    <div class="kq-price-value">₹6,350</div>
+    <div class="kq-price-unit">per quintal</div>
+  </article>
+
+  <article class="kq-price-card">
+    <div class="kq-price-crop">🌼 Mustard</div>
+    <div class="kq-price-value">₹6,200</div>
+    <div class="kq-price-unit">per quintal</div>
+  </article>
+
+  <article class="kq-price-card">
+    <div class="kq-price-crop">🌾 Paddy</div>
+    <div class="kq-price-value">₹2,369</div>
+    <div class="kq-price-unit">per quintal</div>
+  </article>
+
+</div>
+
+<div class="kq-market-note">
+  <span>ⓘ</span>
+  <span>
+    Prices shown are indicative/demo values for the prototype.
+    Connect an official mandi-price source before presenting them as live market prices.
+  </span>
+</div>
+```
+
+  </div>
+</section>
+
+<style>
+  .kq-market-prices {
+    width: 100%;
+    padding: 70px 20px;
+    background: #f5f8f1;
+    border-top: 1px solid #dfe7d8;
+    border-bottom: 1px solid #dfe7d8;
+  }
+
+  .kq-market-prices-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  .kq-market-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .kq-market-eyebrow {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: #287044;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+  }
+
+  .kq-market-heading h2 {
+    margin: 0;
+    color: #173d27;
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.1;
+  }
+
+  .kq-market-heading p {
+    margin: 10px 0 0;
+    color: #647064;
+    font-size: 15px;
+  }
+
+  .kq-market-date {
+    flex-shrink: 0;
+    padding: 9px 13px;
+    border-radius: 20px;
+    background: #e5f0df;
+    color: #28633a;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .kq-price-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .kq-price-card {
+    padding: 22px;
+    background: #fff;
+    border: 1px solid #dce5d8;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(30, 60, 35, 0.06);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+
+  .kq-price-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(30, 60, 35, 0.10);
+  }
+
+  .kq-price-crop {
+    color: #304536;
+    font-size: 17px;
+    font-weight: 750;
+  }
+
+  .kq-price-value {
+    margin-top: 18px;
+    color: #176b38;
+    font-size: 27px;
+    font-weight: 850;
+  }
+
+  .kq-price-unit {
+    margin-top: 4px;
+    color: #7a8378;
+    font-size: 13px;
+  }
+
+  .kq-market-note {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+    margin-top: 20px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: #fff9e8;
+    border: 1px solid #ead9a4;
+    color: #675a32;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .kq-price-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .kq-market-prices {
+      padding: 48px 15px;
+    }
+
+    .kq-market-heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .kq-price-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .kq-price-card {
+      padding: 18px;
+    }
+  }
+</style>
+
+<script>
+  // Display the actual current date on the market-price section.
+  (function () {
+    const el = document.getElementById('marketPriceDate');
+    if (!el) return;
+
+    const today = new Date();
+
+    el.textContent = 'Updated ' + today.toLocaleDateString('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    });
+  })();
+</script>
+
+<!-- END TODAY'S MARKET PRICES -->
+
 </body>
 </html>
