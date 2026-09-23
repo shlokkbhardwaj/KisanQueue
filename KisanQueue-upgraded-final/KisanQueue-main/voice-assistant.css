@@ -1,0 +1,402 @@
+/* ===========================================================================
+   voice-assistant.css
+   Styles for the floating voice/chat assistant widget built by
+   voice-assistant.js (#kqVoiceRoot). Uses the host page's own CSS custom
+   properties (--green-700, --gold, --sage-bg, etc.) so it themes
+   automatically with page01 / page03 / page06. Falls back to sane defaults
+   if a page hasn't defined those variables.
+   =========================================================================== */
+
+#kqVoiceRoot {
+  --kq-green-900: var(--green-900, #1E231E);
+  --kq-green-700: var(--green-700, #2D4A2B);
+  --kq-green-500: var(--green-500, #4C6E48);
+  --kq-green-100: var(--green-100, #DCE6D6);
+  --kq-sage-bg:   var(--sage-bg, #EDF1E7);
+  --kq-gold:      var(--gold, #C9962C);
+  --kq-gold-dark: var(--gold-dark, #9C7420);
+  --kq-gold-bg:   var(--gold-bg, #FBF1DD);
+  --kq-white:     var(--white, #FFFFFF);
+  --kq-ink:       var(--ink, #1E231E);
+  --kq-ink-soft:  var(--ink-soft, #5A6156);
+  --kq-border:    var(--border, #D6DCCE);
+  --kq-danger:    var(--danger, #B23A2E);
+  --kq-radius:    var(--radius, 12px);
+  font-family: 'Inter', sans-serif;
+}
+
+#kqVoiceRoot * { box-sizing: border-box; }
+
+/* ---------------------------------------------------------------------
+   Floating mic button (FAB)
+   --------------------------------------------------------------------- */
+#kqMicFab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: none;
+  background: var(--kq-green-700);
+  color: var(--kq-white);
+  font-size: 24px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(30, 35, 30, 0.35);
+  z-index: 9998;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+#kqMicFab:hover { transform: scale(1.06); background: var(--kq-green-500); }
+#kqMicFab:active { transform: scale(0.96); }
+
+#kqMicFab.kq-listening {
+  background: var(--kq-danger);
+  animation: kq-pulse 1.4s ease-out infinite;
+}
+
+@keyframes kq-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(178, 58, 46, 0.55), 0 6px 20px rgba(30, 35, 30, 0.35); }
+  70%  { box-shadow: 0 0 0 16px rgba(178, 58, 46, 0), 0 6px 20px rgba(30, 35, 30, 0.35); }
+  100% { box-shadow: 0 0 0 0 rgba(178, 58, 46, 0), 0 6px 20px rgba(30, 35, 30, 0.35); }
+}
+
+/* ---------------------------------------------------------------------
+   Main panel — hidden until .kq-open is added
+   --------------------------------------------------------------------- */
+.kq-panel {
+  display: none;
+  position: fixed;
+  right: 20px;
+  bottom: 90px;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  height: 520px;
+  max-height: calc(100vh - 120px);
+  background: var(--kq-white);
+  border-radius: var(--kq-radius);
+  box-shadow: 0 16px 48px rgba(30, 35, 30, 0.28);
+  overflow: hidden;
+  flex-direction: column;
+  z-index: 9999;
+}
+
+.kq-panel.kq-open { display: flex; }
+
+.kq-panel-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background: var(--kq-green-700);
+  color: var(--kq-white);
+  flex: 0 0 auto;
+}
+
+.kq-panel-title {
+  flex: 1 1 auto;
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.kq-panel-title span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.kq-lang-btn,
+.kq-close-btn {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--kq-white);
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+
+.kq-lang-btn:hover,
+.kq-close-btn:hover { background: rgba(255, 255, 255, 0.24); }
+
+.kq-offline-banner {
+  flex: 0 0 auto;
+  background: var(--kq-gold-bg);
+  color: var(--kq-gold-dark);
+  font-size: 12.5px;
+  padding: 7px 14px;
+  border-bottom: 1px solid var(--kq-border);
+}
+
+/* ---------------------------------------------------------------------
+   Transcript / chat area
+   --------------------------------------------------------------------- */
+.kq-transcript {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--kq-sage-bg);
+}
+
+.kq-bubble {
+  max-width: 84%;
+  padding: 9px 13px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.kq-bubble-assistant {
+  align-self: flex-start;
+  background: var(--kq-white);
+  color: var(--kq-ink);
+  border: 1px solid var(--kq-border);
+  border-bottom-left-radius: 4px;
+}
+
+.kq-bubble-user {
+  align-self: flex-end;
+  background: var(--kq-green-700);
+  color: var(--kq-white);
+  border-bottom-right-radius: 4px;
+}
+
+.kq-btn-row {
+  align-self: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 100%;
+}
+
+.kq-chip-btn {
+  border: 1.5px solid var(--kq-gold);
+  background: var(--kq-gold-bg);
+  color: var(--kq-gold-dark);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.kq-chip-btn:hover { background: var(--kq-gold); color: var(--kq-white); }
+
+/* Mandi / centre cards inside the transcript */
+.kq-mandi-cards {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kq-mandi-card {
+  background: var(--kq-white);
+  border: 1px solid var(--kq-border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.kq-mandi-name { font-weight: 600; font-size: 14px; color: var(--kq-green-900); margin-bottom: 4px; }
+.kq-mandi-row { font-size: 12.5px; color: var(--kq-ink-soft); margin-top: 2px; }
+
+.kq-compare-table {
+  align-self: stretch;
+  border-collapse: collapse;
+  background: var(--kq-white);
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 12.5px;
+}
+
+.kq-compare-table td {
+  border: 1px solid var(--kq-border);
+  padding: 6px 8px;
+  text-align: center;
+  color: var(--kq-ink);
+}
+
+.kq-compare-table td:first-child { text-align: left; font-weight: 600; background: var(--kq-sage-bg); }
+
+/* "You said: ..." row with inline edit button */
+.kq-you-said {
+  flex: 0 0 auto;
+  font-size: 12.5px;
+  color: var(--kq-ink-soft);
+  font-style: italic;
+  padding: 6px 14px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.kq-edit-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 2px;
+  line-height: 1;
+}
+
+/* Status line ("Press the mic to speak", "Listening…", etc.) */
+.kq-state {
+  flex: 0 0 auto;
+  font-size: 12.5px;
+  color: var(--kq-ink-soft);
+  padding: 8px 14px;
+  border-top: 1px solid var(--kq-border);
+}
+
+/* ---------------------------------------------------------------------
+   Text input row
+   --------------------------------------------------------------------- */
+.kq-input-row {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--kq-border);
+  background: var(--kq-white);
+}
+
+.kq-text-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 1.5px solid var(--kq-border);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13.5px;
+  font-family: inherit;
+  color: var(--kq-ink);
+  outline: none;
+}
+
+.kq-text-input:focus { border-color: var(--kq-green-500); }
+
+.kq-send-btn {
+  flex: 0 0 auto;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 16px;
+  background: var(--kq-green-700);
+  color: var(--kq-white);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.kq-send-btn:hover { background: var(--kq-green-500); }
+
+/* ---------------------------------------------------------------------
+   Language picker overlay
+   --------------------------------------------------------------------- */
+.kq-lang-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 35, 30, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.kq-lang-box {
+  background: var(--kq-white);
+  border-radius: var(--kq-radius);
+  padding: 22px;
+  width: 420px;
+  max-width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(30, 35, 30, 0.4);
+}
+
+.kq-lang-title {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--kq-green-900);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.kq-lang-title-en {
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--kq-ink-soft);
+}
+
+.kq-lang-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.kq-lang-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  border: 1.5px solid var(--kq-border);
+  border-radius: 10px;
+  background: var(--kq-sage-bg);
+  padding: 12px 8px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.kq-lang-option:hover { border-color: var(--kq-green-500); background: var(--kq-green-100); }
+
+.kq-lang-option.kq-lang-textonly { background: var(--kq-white); }
+
+.kq-lang-native { font-size: 15px; font-weight: 600; color: var(--kq-ink); }
+.kq-lang-eng { font-size: 11.5px; color: var(--kq-ink-soft); }
+
+.kq-lang-badge {
+  margin-top: 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--kq-border);
+  color: var(--kq-ink-soft);
+}
+
+.kq-lang-badge-voice { background: var(--kq-green-100); color: var(--kq-green-700); }
+
+/* ---------------------------------------------------------------------
+   Small screens — full-width bottom sheet
+   --------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .kq-panel {
+    right: 8px;
+    left: 8px;
+    bottom: 80px;
+    width: auto;
+    max-width: none;
+  }
+
+  #kqMicFab { right: 14px; bottom: 14px; }
+
+  .kq-lang-list { grid-template-columns: 1fr; }
+}

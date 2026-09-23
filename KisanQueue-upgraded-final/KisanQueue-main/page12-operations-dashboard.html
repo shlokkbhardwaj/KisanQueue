@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Operations Dashboard — SIH26032 Procurement Portal</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --green-900: #1E231E;
+    --green-700: #2D4A2B;
+    --green-500: #4C6E48;
+    --green-100: #DCE6D6;
+    --sage-bg: #EDF1E7;
+    --gold: #C9962C;
+    --gold-dark: #9C7420;
+    --gold-bg: #FBF1DD;
+    --white: #FFFFFF;
+    --ink: #1E231E;
+    --ink-soft: #5A6156;
+    --border: #D6DCCE;
+    --danger: #B23A2E;
+    --danger-bg: #FBEAE7;
+    --success: #2D6A3E;
+    --success-bg: #E2F1E4;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--sage-bg);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--green-700);
+    color: var(--white);
+    padding: 0 2rem;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-mark {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--green-100);
+  }
+
+  .centre-tag {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.65);
+    border-left: 1px solid rgba(255,255,255,0.25);
+    padding-left: 10px;
+    margin-left: 4px;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .staff-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .staff-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--green-900);
+    font-size: 12.5px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .staff-name { font-size: 13.5px; font-weight: 500; }
+  .staff-role { font-size: 11.5px; color: rgba(255,255,255,0.6); }
+
+  .logout-btn {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: var(--white);
+    font-size: 12.5px;
+    font-family: 'Inter', sans-serif;
+    padding: 7px 13px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .logout-btn:hover { background: rgba(255,255,255,0.08); }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.25rem 2rem 4rem;
+  }
+
+  .page-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .page-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  .page-date {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+
+  .demo-toggle {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  .demo-toggle button {
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    padding: 6px 12px;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+  .demo-toggle button:hover { border-color: var(--green-500); color: var(--green-700); }
+  .demo-toggle button.active { background: var(--green-700); color: var(--white); border-color: var(--green-700); }
+
+  .alert-strip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--danger-bg);
+    border: 1px solid #EBC4BD;
+    color: var(--danger);
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    font-size: 13.5px;
+    margin-bottom: 1.75rem;
+  }
+
+  .alert-strip .sev {
+    background: var(--danger);
+    color: var(--white);
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 5px;
+    letter-spacing: 0.02em;
+  }
+
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+
+  .metric-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.1rem;
+  }
+
+  .metric-label {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+
+  .metric-value {
+    font-family: 'Fraunces', serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--green-900);
+  }
+
+  .metric-value.gold { color: var(--gold-dark); }
+  .metric-value.danger { color: var(--danger); }
+
+  .metric-sub {
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, var(--green-100) 25%, #EEF2E9 37%, var(--green-100) 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.4s ease infinite;
+    border-radius: 6px;
+    height: 1.7rem;
+    width: 70%;
+  }
+  @keyframes shimmer { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
+
+  .panel-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 16px;
+    margin-bottom: 1.5rem;
+  }
+
+  .panel {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem 1.5rem;
+  }
+
+  .panel-title {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--green-900);
+    margin-bottom: 1.1rem;
+  }
+
+  .bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    height: 140px;
+  }
+
+  .bar-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+  }
+
+  .bar {
+    width: 100%;
+    max-width: 18px;
+    background: var(--green-500);
+    border-radius: 4px 4px 0 0;
+    transition: height 0.4s ease;
+  }
+
+  .bar-hour {
+    font-size: 9.5px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+  }
+
+  .bar-pct {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: var(--green-700);
+    margin-bottom: 4px;
+  }
+
+  .case-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .case-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .case-item:last-child { border-bottom: none; }
+
+  .case-name { font-weight: 500; color: var(--ink); }
+  .case-meta { font-size: 11.5px; color: var(--ink-soft); }
+
+  .status-pill {
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .status-pill.pending { background: var(--gold-bg); color: var(--gold-dark); }
+  .status-pill.issue { background: var(--danger-bg); color: var(--danger); }
+
+  .empty-state {
+    display: none;
+    text-align: center;
+    padding: 3.5rem 1rem;
+  }
+  .empty-state.show { display: block; }
+  .empty-icon {
+    font-size: 34px;
+    margin-bottom: 12px;
+  }
+  .empty-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .empty-sub {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+
+  .dashboard-content.hidden { display: none; }
+
+  @media (max-width: 900px) {
+    .metric-grid { grid-template-columns: repeat(2, 1fr); }
+    .panel-row { grid-template-columns: 1fr; }
+    main { padding: 1.75rem 1.25rem 3rem; }
+    header { padding: 0 1.25rem; }
+    .centre-tag { display: none; }
+    .bar-col:nth-child(even) .bar-hour,
+    .bar-col:nth-child(even) .bar-pct { visibility: hidden; }
+  }
+</style>
+<style data-component="navigation-inline-css">
+/* KisanQueue shared navigation + branding */
+:root {
+  --kq-green-900: #1E231E;
+  --kq-green-700: #2D4A2B;
+  --kq-green-500: #4C6E48;
+  --kq-green-100: #DCE6D6;
+  --kq-sage: #EDF1E7;
+  --kq-gold: #C9962C;
+  --kq-white: #FFFFFF;
+  --kq-border: #D6DCCE;
+  --kq-shadow: 0 18px 50px rgba(30,35,30,.18);
+}
+
+.kq-menu-btn {
+  position: fixed;
+  top: 14px;
+  left: 16px;
+  z-index: 1100;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(30,35,30,.12);
+  border-radius: 11px;
+  background: rgba(255,255,255,.96);
+  color: var(--kq-green-700);
+  box-shadow: 0 7px 22px rgba(30,35,30,.12);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.kq-menu-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(30,35,30,.16); }
+.kq-menu-btn:focus-visible { outline: 3px solid rgba(201,150,44,.35); outline-offset: 2px; }
+.kq-menu-icon { width: 19px; height: 14px; position: relative; display: block; }
+.kq-menu-icon span { position: absolute; left: 0; width: 19px; height: 2px; border-radius: 2px; background: currentColor; transition: .2s; }
+.kq-menu-icon span:nth-child(1){ top:0; }
+.kq-menu-icon span:nth-child(2){ top:6px; }
+.kq-menu-icon span:nth-child(3){ top:12px; }
+.kq-menu-btn.is-open .kq-menu-icon span:nth-child(1){ top:6px; transform:rotate(45deg); }
+.kq-menu-btn.is-open .kq-menu-icon span:nth-child(2){ opacity:0; }
+.kq-menu-btn.is-open .kq-menu-icon span:nth-child(3){ top:6px; transform:rotate(-45deg); }
+
+.kq-drawer-backdrop {
+  position: fixed; inset: 0; z-index: 1090;
+  background: rgba(17,24,17,.34);
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+  backdrop-filter: blur(2px);
+}
+.kq-drawer-backdrop.is-open { opacity: 1; pointer-events: auto; }
+
+.kq-drawer {
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 1095;
+  width: min(360px, 88vw);
+  background: #fff;
+  border-right: 1px solid var(--kq-border);
+  box-shadow: var(--kq-shadow);
+  transform: translateX(-102%);
+  transition: transform .24s cubic-bezier(.22,.8,.25,1);
+  display: flex; flex-direction: column;
+}
+.kq-drawer.is-open { transform: translateX(0); }
+.kq-drawer-head { padding: 20px 20px 16px; border-bottom: 1px solid #edf0e9; }
+.kq-drawer-brand { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.kq-drawer-brand img { width: 164px; height:auto; display:block; }
+.kq-drawer-tag { margin-top:8px; font-size:11px; color:#72796e; letter-spacing:.03em; }
+.kq-nav-scroll { overflow:auto; padding: 12px 12px 20px; }
+.kq-nav-group { margin-bottom: 16px; }
+.kq-nav-label { padding: 8px 10px 6px; font-size:10.5px; font-weight:700; color:#7a8275; letter-spacing:.08em; text-transform:uppercase; }
+.kq-nav-link {
+  display:flex; align-items:center; gap:10px; width:100%;
+  padding:10px 11px; margin:2px 0; border-radius:9px;
+  color:#343b32; text-decoration:none; font-size:13px; font-weight:500;
+  transition: background .15s ease, color .15s ease, transform .15s ease;
+}
+.kq-nav-link:hover { background:#f1f5ed; color:var(--kq-green-700); transform:translateX(2px); }
+.kq-nav-link.active { background:var(--kq-green-100); color:var(--kq-green-700); font-weight:700; }
+.kq-nav-num { width:25px; height:25px; border-radius:7px; flex:none; display:grid; place-items:center; font-size:10px; font-weight:700; background:#f3f5f1; color:#687063; }
+.kq-nav-link.active .kq-nav-num { background:var(--kq-green-700); color:#fff; }
+.kq-drawer-foot { margin-top:auto; padding:13px 20px 18px; border-top:1px solid #edf0e9; font-size:10.5px; line-height:1.5; color:#7b8278; }
+
+/* Existing headers/topbars get enough room for the floating menu control. */
+body.kq-enhanced header, body.kq-enhanced .topbar { padding-left: 76px !important; }
+body.kq-enhanced header .brand, body.kq-enhanced .topbar .brand { min-width:0; }
+.kq-brand-wrap { display:inline-flex; align-items:center; gap:0; text-decoration:none; }
+.kq-brand-logo { display:block; width:156px; height:auto; background:#fff; border-radius:9px; padding:4px 8px; box-shadow:0 2px 9px rgba(0,0,0,.08); }
+.topbar .kq-brand-logo { width:166px; box-shadow:none; border:1px solid rgba(30,35,30,.08); }
+
+.kq-login-brand {
+  position:fixed; top:18px; left:76px; z-index:100;
+  display:inline-flex; padding:5px 9px; border-radius:10px; background:#fff;
+  border:1px solid rgba(30,35,30,.1); box-shadow:0 6px 20px rgba(30,35,30,.09);
+}
+.kq-login-brand img { width:166px; height:auto; display:block; }
+
+@media (max-width: 720px) {
+  body.kq-enhanced header, body.kq-enhanced .topbar { padding-left: 68px !important; padding-right: 1rem !important; }
+  .kq-brand-logo { width:130px; }
+  .topbar .kq-brand-logo { width:138px; }
+  .kq-menu-btn { top:10px; left:10px; width:40px; height:40px; }
+  .kq-login-brand { left:62px; top:12px; }
+  .kq-login-brand img { width:140px; }
+  .kq-drawer-brand img { width:150px; }
+}
+
+/* Integrated branding polish */
+.kq-brand-wrap:focus-visible { outline: 3px solid rgba(201,150,44,.35); outline-offset: 3px; border-radius: 10px; }
+.topbar .brand .kq-brand-wrap { flex:none; }
+header .brand .kq-brand-wrap, .topbar .brand .kq-brand-wrap { max-width: min(210px, 42vw); }
+header .brand .kq-brand-logo, .topbar .brand .kq-brand-logo { max-width:100%; }
+
+</style><style data-component="premium-navigation-polish">
+
+/* ===== Premium Main navigation polish ===== */
+:root{
+  --fq-deep:#073b2a;
+  --fq-green:#0b6b45;
+  --fq-green-2:#15905f;
+  --fq-gold:#f3c34f;
+  --fq-cream:#fff9e9;
+}
+
+/* Keep the page content clear of the floating menu and remove legacy brand styling. */
+.brand-mark,.brand-icon{display:none!important;}
+header .brand,.topbar .brand{margin-left:72px!important;}
+
+/* Highlighted PNG logo */
+.farmer-queue-logo,
+.kq-brand-logo{
+  display:block!important;
+  width:178px!important;
+  max-width:min(178px,42vw)!important;
+  height:auto!important;
+  padding:7px 12px!important;
+  box-sizing:border-box!important;
+  background:linear-gradient(135deg,#063d2b,#0b6b45)!important;
+  border:1px solid rgba(243,195,79,.82)!important;
+  border-radius:13px!important;
+  box-shadow:0 0 0 2px rgba(243,195,79,.12),0 7px 24px rgba(7,59,42,.25),0 0 22px rgba(243,195,79,.16)!important;
+  transition:transform .2s ease,box-shadow .2s ease!important;
+}
+.farmer-queue-logo:hover,.kq-brand-logo:hover{
+  transform:translateY(-1px) scale(1.015)!important;
+  box-shadow:0 0 0 3px rgba(243,195,79,.16),0 10px 30px rgba(7,59,42,.3),0 0 28px rgba(243,195,79,.23)!important;
+}
+
+/* Floating navigation button */
+.kq-menu-btn{
+  position:fixed!important;
+  z-index:10002!important;
+  top:18px!important;
+  left:18px!important;
+  width:46px!important;
+  height:46px!important;
+  border:1px solid rgba(243,195,79,.8)!important;
+  border-radius:13px!important;
+  background:linear-gradient(145deg,#0b6b45,#073b2a)!important;
+  color:#fff!important;
+  box-shadow:0 8px 24px rgba(7,59,42,.28),0 0 0 3px rgba(243,195,79,.10)!important;
+  backdrop-filter:blur(8px)!important;
+}
+.kq-menu-btn:hover{transform:translateY(-2px)!important;box-shadow:0 12px 28px rgba(7,59,42,.34),0 0 0 4px rgba(243,195,79,.14)!important;}
+.kq-menu-btn.is-open{background:linear-gradient(145deg,#d79f24,#f3c34f)!important;color:#073b2a!important;}
+.kq-menu-icon span{background:currentColor!important;height:2.5px!important;}
+
+/* Colored, premium side drawer */
+.kq-drawer{
+  z-index:10001!important;
+  width:min(330px,88vw)!important;
+  background:linear-gradient(180deg,#063b2a 0%,#07533a 46%,#063426 100%)!important;
+  color:#fff!important;
+  border-right:1px solid rgba(243,195,79,.34)!important;
+  box-shadow:18px 0 50px rgba(0,0,0,.25)!important;
+}
+.kq-drawer::after{
+  content:"";
+  position:absolute;
+  top:0;right:0;bottom:0;width:2px;
+  background:linear-gradient(180deg,transparent,var(--fq-gold),transparent);
+  opacity:.65;
+  pointer-events:none;
+}
+.kq-drawer-head{
+  padding:20px 18px 18px!important;
+  border-bottom:1px solid rgba(255,255,255,.13)!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(243,195,79,.05))!important;
+}
+.kq-drawer-head .kq-brand-wrap{display:block!important;}
+.kq-drawer-head .kq-brand-logo{width:200px!important;max-width:100%!important;margin:0 auto!important;}
+.kq-drawer-tag{color:rgba(255,255,255,.68)!important;margin-top:12px!important;font-size:10.5px!important;}
+.kq-nav-scroll{padding:15px 12px 18px!important;}
+.kq-nav-group{margin-bottom:14px!important;}
+.kq-nav-label{color:rgba(255,255,255,.52)!important;padding:9px 10px 7px!important;letter-spacing:.12em!important;}
+.kq-nav-link{
+  color:rgba(255,255,255,.88)!important;
+  border:1px solid transparent!important;
+  border-radius:11px!important;
+  margin:4px 0!important;
+  padding:10px 10px!important;
+  transition:all .18s ease!important;
+}
+.kq-nav-link:hover{
+  background:rgba(255,255,255,.09)!important;
+  border-color:rgba(255,255,255,.09)!important;
+  color:#fff!important;
+  transform:translateX(4px)!important;
+}
+.kq-nav-link.active{
+  background:linear-gradient(90deg,rgba(243,195,79,.23),rgba(243,195,79,.08))!important;
+  border-color:rgba(243,195,79,.42)!important;
+  color:#fff!important;
+  box-shadow:inset 3px 0 0 var(--fq-gold),0 5px 18px rgba(0,0,0,.08)!important;
+}
+.kq-nav-num{
+  background:rgba(255,255,255,.10)!important;
+  color:rgba(255,255,255,.72)!important;
+  border:1px solid rgba(255,255,255,.10)!important;
+}
+.kq-nav-link.active .kq-nav-num{
+  background:var(--fq-gold)!important;
+  color:#073b2a!important;
+}
+.kq-drawer-foot{display:none!important;}
+.kq-drawer-backdrop{background:rgba(2,24,16,.48)!important;backdrop-filter:blur(2px)!important;}
+
+/* Staff-login floating logo */
+.kq-login-brand{left:76px!important;top:17px!important;z-index:9999!important;}
+.kq-login-brand img{
+  width:178px!important;
+  padding:7px 12px!important;
+  background:linear-gradient(135deg,#063d2b,#0b6b45)!important;
+  border:1px solid rgba(243,195,79,.82)!important;
+  border-radius:13px!important;
+  box-shadow:0 0 0 2px rgba(243,195,79,.12),0 7px 24px rgba(7,59,42,.25),0 0 22px rgba(243,195,79,.16)!important;
+}
+
+@media(max-width:640px){
+  header .brand,.topbar .brand{margin-left:61px!important;}
+  .kq-menu-btn{top:11px!important;left:11px!important;width:42px!important;height:42px!important;border-radius:11px!important;}
+  .farmer-queue-logo,.kq-brand-logo,.kq-login-brand img{width:145px!important;padding:6px 9px!important;}
+  .kq-login-brand{left:62px!important;top:11px!important;}
+  .kq-drawer-head .kq-brand-logo{width:190px!important;}
+}
+
+</style>
+
+
+
+<style id="kq-professional-visual-refinement">
+/* ===== KisanQueue visual refinement =====
+   One shared refinement layer: clear logo contrast, cleaner drawer header,
+   responsive navigation, and a dedicated staff-login logo treatment. */
+
+/* Sidebar header: warm light panel gives the dark-green logo maximum contrast. */
+.kq-drawer-head{
+  background:linear-gradient(135deg,#f8f3e4 0%,#f2ead5 100%) !important;
+  border-bottom:2px solid #d7a52e !important;
+  min-height:122px !important;
+  padding:18px 18px 16px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  position:relative !important;
+}
+.kq-drawer-head::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-2px;
+  height:2px;
+  background:linear-gradient(90deg,#0b6b45,#d7a52e,#0b6b45);
+  pointer-events:none;
+}
+.kq-drawer-head .kq-brand-wrap{
+  display:block !important;
+  width:100% !important;
+  text-align:center !important;
+}
+.kq-drawer-head .kq-brand-logo,
+.kq-drawer-head .farmer-queue-logo,
+.kq-drawer-head img{
+  width:210px !important;
+  max-width:90% !important;
+  height:auto !important;
+  display:block !important;
+  margin:0 auto !important;
+  padding:0 !important;
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  filter:none !important;
+}
+.kq-drawer-tag{
+  color:#536055 !important;
+  margin-top:9px !important;
+  font-size:10.5px !important;
+  font-weight:600 !important;
+}
+
+/* Keep the drawer itself refined and consistent on every page. */
+.kq-drawer{
+  background:linear-gradient(180deg,#063b2a 0%,#07533a 48%,#063426 100%) !important;
+  border-right:1px solid rgba(215,165,46,.45) !important;
+}
+.kq-nav-link{
+  border-radius:10px !important;
+}
+.kq-nav-link.active{
+  background:linear-gradient(90deg,rgba(243,195,79,.24),rgba(243,195,79,.08)) !important;
+}
+
+/* Header branding: clean logo, no heavy badge around it. */
+.farmer-queue-logo,
+.kq-brand-logo{
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  padding:0 !important;
+  filter:none !important;
+}
+.kq-brand-wrap{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+/* Staff login: put the logo on a light card so it never blends into the green panel. */
+.kq-login-brand{
+  position:fixed !important;
+  top:16px !important;
+  left:76px !important;
+  z-index:10020 !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:8px 11px !important;
+  background:#fffdf6 !important;
+  border:1px solid rgba(215,165,46,.75) !important;
+  border-radius:12px !important;
+  box-shadow:0 7px 22px rgba(7,59,42,.16) !important;
+}
+.kq-login-brand a{
+  display:block !important;
+  line-height:0 !important;
+}
+.kq-login-brand img{
+  width:170px !important;
+  max-width:42vw !important;
+  height:auto !important;
+  display:block !important;
+  padding:0 !important;
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  filter:none !important;
+}
+
+/* Give the staff panel enough breathing room below the floating brand. */
+body:has(.kq-login-brand) .field-panel{
+  padding-top:5.5rem !important;
+}
+
+/* Mobile: compact top controls, no crowding or overlap. */
+@media (max-width:720px){
+  body.kq-enhanced header,
+  body.kq-enhanced .topbar{
+    padding-left:62px !important;
+    padding-right:14px !important;
+  }
+  header .brand,
+  .topbar .brand{
+    margin-left:0 !important;
+    min-width:0 !important;
+    max-width:calc(100vw - 150px) !important;
+  }
+  header .brand .kq-brand-wrap,
+  .topbar .brand .kq-brand-wrap{
+    max-width:100% !important;
+  }
+  header .brand .kq-brand-logo,
+  .topbar .brand .kq-brand-logo,
+  .farmer-queue-logo{
+    width:140px !important;
+    max-width:100% !important;
+    height:auto !important;
+  }
+  .kq-menu-btn{
+    top:10px !important;
+    left:10px !important;
+    width:42px !important;
+    height:42px !important;
+    border-radius:11px !important;
+  }
+  .kq-drawer{
+    width:min(320px,88vw) !important;
+  }
+  .kq-drawer-head{
+    min-height:108px !important;
+    padding:15px 14px 13px !important;
+  }
+  .kq-drawer-head .kq-brand-logo,
+  .kq-drawer-head .farmer-queue-logo,
+  .kq-drawer-head img{
+    width:190px !important;
+  }
+  .kq-drawer-tag{
+    margin-top:7px !important;
+  }
+
+  /* Staff login top: logo sits beside the menu with safe spacing. */
+  .kq-login-brand{
+    top:10px !important;
+    left:62px !important;
+    padding:6px 8px !important;
+    border-radius:10px !important;
+  }
+  .kq-login-brand img{
+    width:132px !important;
+    max-width:calc(100vw - 100px) !important;
+  }
+  body:has(.kq-login-brand) .field-panel{
+    padding-top:5.25rem !important;
+    padding-left:1.25rem !important;
+    padding-right:1.25rem !important;
+  }
+}
+
+@media (max-width:420px){
+  .kq-login-brand img{ width:122px !important; }
+  .kq-login-brand{ left:60px !important; }
+  body:has(.kq-login-brand) .field-panel{
+    padding-top:5rem !important;
+  }
+}
+</style>
+
+<style id="final-staff-ops-polish">
+
+/* Final responsive polish for Operations & Staff screens */
+header {
+  min-height: 72px !important;
+  height: auto !important;
+  padding: 12px 28px !important;
+  gap: 18px !important;
+}
+header .brand, .topbar .brand { flex: 1 1 auto !important; min-width: 0 !important; }
+header .brand a, .topbar .brand a { display:flex !important; align-items:center !important; min-width:0 !important; }
+header .farmer-queue-logo, header .kq-brand-logo, .topbar .farmer-queue-logo, .topbar .kq-brand-logo {
+  width: 166px !important; max-width: 100% !important; height:auto !important;
+}
+.header-right { flex: 0 0 auto !important; gap: 12px !important; }
+.centre-tag { white-space: nowrap !important; }
+main { width:100% !important; }
+
+/* Login branding: one logo only, never underneath the menu button. */
+.kq-login-brand {
+  position: absolute !important;
+  top: 22px !important;
+  left: 28px !important;
+  padding: 7px 10px !important;
+  background: #fffdf6 !important;
+  border: 1px solid #d7a52e !important;
+  border-radius: 10px !important;
+  box-shadow: 0 5px 16px rgba(0,0,0,.12) !important;
+  z-index: 5 !important;
+}
+.kq-login-brand img { width: 160px !important; max-width: 34vw !important; padding:0 !important; background:transparent !important; border:0 !important; box-shadow:none !important; }
+body:has(.kq-login-brand) .field-panel { padding-top: 7.2rem !important; }
+
+@media (max-width: 760px) {
+  header { padding: 11px 14px 11px 64px !important; min-height: 66px !important; align-items:center !important; }
+  header .brand, .topbar .brand { max-width: calc(100vw - 160px) !important; }
+  header .farmer-queue-logo, header .kq-brand-logo, .topbar .farmer-queue-logo, .topbar .kq-brand-logo { width: 128px !important; }
+  .centre-tag { display:none !important; }
+  .header-right { gap: 7px !important; }
+  .staff-badge { gap: 5px !important; }
+  .staff-name { font-size: 11px !important; }
+  .staff-role { display:none !important; }
+  .staff-avatar { width:28px !important; height:28px !important; }
+  .logout-btn { padding:7px 9px !important; font-size:11px !important; }
+  main { padding: 1.25rem 1rem 3rem !important; }
+  .page-heading { align-items:flex-start !important; margin-bottom:1.1rem !important; }
+  .page-title { font-size:1.35rem !important; }
+  .page-sub, .page-date { font-size:12px !important; }
+  .metric-grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; gap:10px !important; }
+  .metric-card { padding: .9rem !important; }
+  .call-bar, .alert-strip { flex-wrap:wrap !important; gap:12px !important; }
+  .call-next-btn { width:100% !important; }
+  
+  .kq-login-brand { top: 12px !important; left: 62px !important; padding:5px 7px !important; }
+  .kq-login-brand img { width: 124px !important; max-width: calc(100vw - 95px) !important; }
+  body:has(.kq-login-brand) .field-panel { padding-top: 6.2rem !important; padding-left:1.25rem !important; padding-right:1.25rem !important; }
+}
+@media (max-width:420px) {
+  header .farmer-queue-logo, header .kq-brand-logo, .topbar .farmer-queue-logo, .topbar .kq-brand-logo { width:112px !important; }
+  .header-right { gap:5px !important; }
+  .logout-btn { padding:6px 7px !important; }
+  .metric-grid { grid-template-columns:1fr 1fr !important; }
+  .kq-login-brand img { width:112px !important; }
+}
+
+</style>
+<script src="staff-app.js"></script>
+<link rel="stylesheet" href="hindi-i18n.css">
+  <script src="hindi-i18n.js"></script>
+</head>
+
+
+<body>
+<header>
+<div class="brand"><a aria-label="Farmer Queue home" href="page01-landing.html"><img alt="Farmer Queue" class="farmer-queue-logo" src="farmer-queue.png"/></a></div>
+<div class="header-right">
+<div class="staff-badge">
+<div class="staff-avatar">RK</div>
+<div>
+<div class="staff-name">Ramesh Kumar</div>
+<div class="staff-role">Centre Operator</div>
+</div>
+</div>
+<button class="logout-btn">Log out</button>
+</div>
+</header>
+<main>
+<div class="page-heading">
+<div class="page-title">Today's Operations</div>
+<div class="page-date" id="todayDate"></div>
+</div>
+<div class="demo-toggle">
+<button class="active" id="btnLoaded">Loaded</button>
+<button id="btnLoading">Loading state</button>
+<button id="btnEmpty">Empty-day state</button>
+</div>
+<div class="dashboard-content" id="dashboardContent">
+<div class="alert-strip">
+<span class="sev">ALERT</span>
+<span>Counter 3 is offline — bookings are being redirected to Counters 1 and 2.</span>
+</div>
+<div class="metric-grid" id="metricGrid">
+<div class="metric-card">
+<div class="metric-label">Bookings today</div>
+<div class="metric-value" id="mBookings">86</div>
+<div class="metric-sub">12 more than yesterday</div>
+</div>
+<div class="metric-card">
+<div class="metric-label">Farmers waiting</div>
+<div class="metric-value gold" id="mWaiting">14</div>
+<div class="metric-sub">Avg wait 22 min</div>
+</div>
+<div class="metric-card">
+<div class="metric-label">Active counters</div>
+<div class="metric-value" id="mCounters">2 / 3</div>
+<div class="metric-sub">Counter 3 offline</div>
+</div>
+<div class="metric-card">
+<div class="metric-label">Completed today</div>
+<div class="metric-value" id="mCompleted">61</div>
+<div class="metric-sub">71% of today's bookings</div>
+</div>
+<div class="metric-card">
+<div class="metric-label">Pending cases</div>
+<div class="metric-value danger" id="mPending">5</div>
+<div class="metric-sub">Needs review</div>
+</div>
+</div>
+<div class="panel-row">
+<div class="panel">
+<div class="panel-title">Bookings by hour</div>
+<div class="bar-chart" id="barChart"></div>
+</div>
+<div class="panel">
+<div class="panel-title">Pending cases</div>
+<div class="case-list">
+<div class="case-item">
+<div>
+<div class="case-name">Suresh Yadav — Token #A214</div>
+<div class="case-meta">Weighing discrepancy</div>
+</div>
+<span class="status-pill issue">Issue</span>
+</div>
+<div class="case-item">
+<div>
+<div class="case-name">Kavita Devi — Token #A227</div>
+<div class="case-meta">Awaiting quality check</div>
+</div>
+<span class="status-pill pending">Pending</span>
+</div>
+<div class="case-item">
+<div>
+<div class="case-name">Manoj Singh — Token #A231</div>
+<div class="case-meta">Payment not confirmed</div>
+</div>
+<span class="status-pill pending">Pending</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="empty-state" id="emptyState">
+<div class="empty-icon">🌾</div>
+<div class="empty-title">No bookings yet today</div>
+<div class="empty-sub">Once farmers start booking slots at the selected procurement centre, they'll show up here.</div>
+</div>
+</main>
+<script>
+(async function(){
+ const staff=await KQStaff.requireAuth(); if(!staff)return;
+ document.querySelector('.staff-name').textContent=staff.name;document.querySelector('.staff-role').textContent=staff.role;
+ document.querySelector('.staff-avatar').textContent=staff.name.split(/\s+/).map(x=>x[0]).slice(0,2).join('').toUpperCase();
+ document.querySelector('.logout-btn').onclick=()=>KQStaff.logout();
+ document.getElementById('todayDate').textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'});
+ const hours=['8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm'];
+ async function load(){try{const out=await KQStaff.api('/staff/queue?date='+new Date().toISOString().slice(0,10));const d=out.data||[];const c=out.summary||{};document.getElementById('mBookings').textContent=d.length;document.getElementById('mWaiting').textContent=c.waiting||0;document.getElementById('mCounters').textContent=new Set(d.filter(x=>x.counter_id).map(x=>x.counter_id)).size;document.getElementById('mCompleted').textContent=c.completed||0;document.getElementById('mPending').textContent=(c.hold||0);document.querySelector('.alert-strip').innerHTML='<span class="sev">LIVE</span><span>Queue data is connected to the backend. '+(c.waiting||0)+' farmer(s) waiting.</span>';
+ const counts=hours.map(h=>{const hh=Number(h.replace(/am|pm/,''));const hour=hh===12?12:(h.includes('pm')?hh+12:hh);return d.filter(x=>Number(String(x.booking?.slot_start||'').slice(0,2))===hour).length});const chart=document.getElementById('barChart');chart.innerHTML='';const max=Math.max(1,...counts);hours.forEach((h,i)=>{const col=document.createElement('div');col.className='bar-col';const pct=document.createElement('div');pct.className='bar-pct';pct.textContent=counts[i];const bar=document.createElement('div');bar.className='bar';bar.style.height=(counts[i]/max*100)+'%';const label=document.createElement('div');label.className='bar-hour';label.textContent=h;col.append(pct,bar,label);chart.appendChild(col)});
+ }catch(e){document.querySelector('.alert-strip').innerHTML='<span class="sev">ERROR</span><span>'+e.message+'</span>'}}
+ document.getElementById('btnLoaded')?.addEventListener('click',load);document.getElementById('btnLoading')?.addEventListener('click',()=>{});document.getElementById('btnEmpty')?.addEventListener('click',()=>{});await load();setInterval(load,15000);
+})();
+</script>
+<script data-component="navigation-inline-js">
+(function () {
+  'use strict';
+
+  const pages = [
+    { n:'01', label:'Landing / Home', file:'page01-landing.html', group:'Farmer portal' },
+    { n:'02', label:'Farmer registration', file:'page02-farmer-registration.html', group:'Farmer portal' },
+    { n:'03', label:'Slot booking', file:'page03-slot-booking.html', group:'Farmer portal' },
+    { n:'04', label:'Booking token', file:'page04-booking-token.html', group:'Farmer portal' },
+    { n:'05', label:'Procurement status', file:'page05-procurement-status.html', group:'Farmer portal' },
+    { n:'06', label:'Farmer dashboard', file:'page06-farmer-dashboard.html', group:'Farmer portal' },
+    { n:'07', label:'Centre finder', file:'page07-centre-finder.html', group:'Farmer portal' },
+    { n:'08', label:'Live queue', file:'page08-live-queue.html', group:'Farmer portal' },
+    { n:'09', label:'Notifications', file:'page09-notifications.html', group:'Farmer portal' },
+    { n:'10', label:'Alerts', file:'page10-alerts.html', group:'Farmer portal' },
+    { n:'11', label:'Staff login', file:'page11-staff-login.html', group:'Operations & staff' },
+    { n:'12', label:'Operations dashboard', file:'page12-operations-dashboard.html', group:'Operations & staff' },
+    { n:'13', label:'Queue console', file:'page13-queue-console.html', group:'Operations & staff' },
+    { n:'14', label:'Status management', file:'page14-status-management.html', group:'Operations & staff' },
+    { n:'15', label:'Reports & analytics', file:'page15-reports-analytics.html', group:'Operations & staff' },
+    { n:'16', label:'Settings', file:'page16-settings.html', group:'Operations & staff' }
+  ];
+
+  const currentFile = location.pathname.split(/[\\/]/).pop() || 'page01-landing.html';
+
+  function logoHTML(extraClass) {
+    return '<a class="kq-brand-wrap" href="page01-landing.html" aria-label="Farmer Queue home">' +
+      '<img class="kq-brand-logo ' + (extraClass || '') + '" src="farmer-queue.png" alt="Farmer Queue">' +
+      '</a>';
+  }
+
+  function addNavigation() {
+    document.body.classList.add('kq-enhanced');
+
+    const menu = document.createElement('button');
+    menu.className = 'kq-menu-btn';
+    menu.type = 'button';
+    menu.setAttribute('aria-label', 'Open navigation menu');
+    menu.setAttribute('aria-expanded', 'false');
+    menu.innerHTML = '<span class="kq-menu-icon"><span></span><span></span><span></span></span>';
+    document.body.appendChild(menu);
+
+    const backdrop = document.createElement('div');
+    backdrop.className = 'kq-drawer-backdrop';
+    document.body.appendChild(backdrop);
+
+    const drawer = document.createElement('aside');
+    drawer.className = 'kq-drawer';
+    drawer.setAttribute('aria-label', 'Main navigation');
+
+    const groups = ['Farmer portal', 'Operations & staff'];
+    let nav = '';
+    groups.forEach(group => {
+      nav += '<section class="kq-nav-group"><div class="kq-nav-label">' + group + '</div>';
+      pages.filter(p => p.group === group).forEach(p => {
+        const active = p.file === currentFile;
+        nav += '<a class="kq-nav-link' + (active ? ' active' : '') + '" href="' + p.file + '"' + (active ? ' aria-current="page"' : '') + '>' +
+          '<span>' + p.label + '</span></a>';
+      });
+      nav += '</section>';
+    });
+
+    drawer.innerHTML =
+      '<div class="kq-drawer-head">' + logoHTML('') + '</div>' +
+      '<div class="kq-nav-scroll">' + nav + '</div>' +
+      '';
+    document.body.appendChild(drawer);
+
+    function setOpen(open) {
+      drawer.classList.toggle('is-open', open);
+      backdrop.classList.toggle('is-open', open);
+      menu.classList.toggle('is-open', open);
+      menu.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    }
+    menu.addEventListener('click', () => setOpen(!drawer.classList.contains('is-open')));
+    backdrop.addEventListener('click', () => setOpen(false));
+    drawer.addEventListener('click', e => { if (e.target.closest('a')) setOpen(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+  }
+
+  function applyBranding() {
+    const brands = document.querySelectorAll('header .brand, .topbar .brand');
+    brands.forEach(el => {
+      el.innerHTML = logoHTML('');
+    });
+
+    // Every screen gets a persistent, clickable logo. Existing page headers
+    // are upgraded in-place; the login screen receives a matching brand.
+    if (currentFile === 'page11-staff-login.html' && !document.querySelector('.kq-login-brand')) {
+      const loginBrand = document.createElement('div');
+      loginBrand.className = 'kq-login-brand';
+      loginBrand.innerHTML = '<a href="page01-landing.html" aria-label="Farmer Queue home"><img src="farmer-queue.png" alt="Farmer Queue"></a>';
+      document.body.appendChild(loginBrand);
+    }
+  }
+
+  function wireCoreLinks() {
+    const map = {
+      startBookingBtn: 'page03-slot-booking.html',
+      checkStatusBtn: 'page05-procurement-status.html',
+      searchCentreBtn: 'page07-centre-finder.html',
+      viewTokenBtn: 'page04-booking-token.html',
+      viewTokenFromDashboard: 'page04-booking-token.html',
+      doneBtn: 'page01-landing.html',
+      bookFromEmpty: 'page03-slot-booking.html',
+      rebookFromCancelled: 'page03-slot-booking.html',
+      rebookFromExpired: 'page03-slot-booking.html'
+    };
+    Object.keys(map).forEach(id => {
+      let el = document.getElementById(id);
+      if (!el || el.dataset.kqWired) return;
+      // Replace only these navigation CTAs so prototype alert/demo handlers do not
+      // fire before the user is taken to the connected screen.
+      const clean = el.cloneNode(true);
+      el.replaceWith(clean);
+      el = clean;
+      el.dataset.kqWired = '1';
+      el.addEventListener('click', () => { location.href = map[id]; });
+    });
+
+    document.querySelectorAll('.back-link').forEach(a => {
+      a.href = 'page01-landing.html';
+      a.removeAttribute('onclick');
+    });
+
+    const staffLogin = document.querySelector('.login-link');
+    if (staffLogin) {
+      staffLogin.href = 'page11-staff-login.html';
+      staffLogin.removeAttribute('onclick');
+    }
+  }
+
+  function init() {
+    addNavigation();
+    applyBranding();
+    wireCoreLinks();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
+</script>
+
+
+</body>
+</html>
