@@ -1,7 +1,0 @@
-/* Shared language control: stays inside the existing header so it never covers login/logout controls. */
-.kq-i18n-control{position:static;display:flex;align-items:center;gap:6px;margin-left:auto;flex:0 0 auto;padding:5px 7px;border-radius:10px;background:rgba(255,255,255,.96);box-shadow:0 2px 12px rgba(0,0,0,.10);font:600 12px/1.2 system-ui,sans-serif;color:#173b2d;z-index:20}
-.kq-i18n-control select{border:1px solid #cbd7cf;border-radius:8px;background:#fff;padding:5px 8px;color:#173b2d;font:600 12px system-ui,sans-serif;cursor:pointer}
-.kq-i18n-control label{white-space:nowrap}
-.topbar,.topbar-right,.header-right,header{display:flex;align-items:center}
-@media(max-width:700px){.kq-i18n-control{padding:3px 5px;box-shadow:none;background:transparent}.kq-i18n-control label{display:none}.kq-i18n-control select{padding:4px 6px;max-width:92px}.header-right,.topbar-right{gap:6px!important}}
-@media(max-width:460px){.kq-i18n-control select{max-width:78px;font-size:11px}.kq-i18n-control{margin-left:6px}}
