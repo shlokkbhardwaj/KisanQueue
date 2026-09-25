@@ -1,65 +1,59 @@
-/* Language switcher */
+/* =========================================================
+   KISAN QUEUE — LANGUAGE SWITCHER
+   Globe icon + English/Hindi dropdown
+   ========================================================= */
+
+/* Keep any existing inline language-switcher containers harmless */
 .language-switcher {
-    position: static;
     display: inline-flex;
     align-items: center;
     gap: 6px;
     z-index: 1000;
 }
-/* ===== LANGUAGE ICON ONLY ===== */
+
+
+/* =========================================================
+   MAIN LANGUAGE CONTROL
+   ========================================================= */
 
 .kq-i18n-control {
     position: fixed !important;
+
     left: 18px !important;
     bottom: 18px !important;
+
     top: auto !important;
     right: auto !important;
 
     width: 46px !important;
     height: 46px !important;
 
-    padding: 0 !important;
     margin: 0 !important;
+    padding: 0 !important;
 
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
 
-    background: white !important;
-    border: 1px solid #ddd !important;
+    background: #ffffff !important;
+
+    border: 1px solid #d9d9d9 !important;
     border-radius: 50% !important;
 
-    box-shadow: 0 3px 12px rgba(0,0,0,.18) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18) !important;
 
-    overflow: hidden !important;
-    z-index: 99999 !important;
+    z-index: 999999 !important;
+
+    overflow: visible !important;
+
+    box-sizing: border-box !important;
 }
 
-/* Hide ALL visible text from the select */
-.kq-i18n-control select {
-    position: absolute !important;
 
-    left: 0 !important;
-    top: 0 !important;
+/* =========================================================
+   GLOBE ICON
+   ========================================================= */
 
-    width: 100% !important;
-    height: 100% !important;
-
-    padding: 0 !important;
-    margin: 0 !important;
-
-    opacity: 0 !important;
-
-    appearance: none !important;
-    -webkit-appearance: none !important;
-
-    border: none !important;
-    outline: none !important;
-
-    cursor: pointer !important;
-}
-
-/* Show ONLY the globe */
 .kq-i18n-control::before {
     content: "🌐" !important;
 
@@ -70,18 +64,154 @@
 
     transform: translate(-50%, -50%) !important;
 
-    font-size: 22px !important;
-    line-height: 1 !important;
-
     width: auto !important;
     height: auto !important;
 
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-size: 22px !important;
+    line-height: 1 !important;
+
     pointer-events: none !important;
+
+    z-index: 1 !important;
 }
 
-/* Prevent old language text/labels from appearing */
+
+/* =========================================================
+   INVISIBLE CLICK AREA
+   ========================================================= */
+
+.kq-i18n-control select {
+    position: absolute !important;
+
+    left: 0 !important;
+    top: 0 !important;
+
+    width: 46px !important;
+    height: 46px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    opacity: 0 !important;
+
+    background: transparent !important;
+
+    border: 0 !important;
+    outline: none !important;
+
+    cursor: pointer !important;
+
+    z-index: 10 !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* =========================================================
+   REMOVE OLD VISIBLE LANGUAGE TEXT
+   ========================================================= */
+
 .kq-i18n-control label,
-.kq-i18n-control span,
-.kq-i18n-control option {
+.kq-i18n-control span {
     display: none !important;
+}
+
+
+/* Do NOT hide the option elements.
+   The browser needs them to build the dropdown. */
+
+.kq-i18n-control option {
+    font-size: 15px !important;
+}
+
+
+/* =========================================================
+   HOVER EFFECT
+   ========================================================= */
+
+.kq-i18n-control:hover {
+    transform: scale(1.05) !important;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.22) !important;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease !important;
+}
+
+
+/* =========================================================
+   ACTIVE / CLICK EFFECT
+   ========================================================= */
+
+.kq-i18n-control:active {
+    transform: scale(0.96) !important;
+}
+
+
+/* =========================================================
+   ACCESSIBILITY / FOCUS
+   ========================================================= */
+
+.kq-i18n-control select:focus {
+    outline: none !important;
+}
+
+.kq-i18n-control:focus-within {
+    box-shadow:
+        0 0 0 3px rgba(46, 125, 50, 0.18),
+        0 4px 14px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .kq-i18n-control {
+        left: 14px !important;
+        bottom: 14px !important;
+
+        width: 44px !important;
+        height: 44px !important;
+    }
+
+    .kq-i18n-control select {
+        width: 44px !important;
+        height: 44px !important;
+    }
+
+    .kq-i18n-control::before {
+        font-size: 21px !important;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .kq-i18n-control {
+        left: 10px !important;
+        bottom: 10px !important;
+
+        width: 42px !important;
+        height: 42px !important;
+    }
+
+    .kq-i18n-control select {
+        width: 42px !important;
+        height: 42px !important;
+    }
+
+    .kq-i18n-control::before {
+        font-size: 20px !important;
+    }
 }
