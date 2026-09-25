@@ -6,7 +6,43 @@
 
   var DICT = {
     'English':'English','हिंदी':'हिंदी','हिन्दी':'हिन्दी','Hindi':'हिंदी',
-    'Farmer login':'किसान लॉगिन','Staff login':'स्टाफ लॉगिन','Home / Farmer / My Profile':'होम / किसान / मेरी प्रोफ़ाइल','My profile':'मेरी प्रोफ़ाइल',
+    /* ===== Navigation & Dashboard ===== */
+
+"Landing/Home": "मुख्य पृष्ठ",
+"Home": "मुख्य पृष्ठ",
+"FARMER PORTAL":"किसान पोर्टल",
+"Farmer Registration": "किसान पंजीकरण",
+"Slot Booking": "स्लॉट बुकिंग",
+"Alerts": "सूचनाएँ",
+
+"Operation Staff": "ऑपरेशन स्टाफ",
+"Operation Dashboard": "ऑपरेशन डैशबोर्ड",
+
+"Queue Console": "कतार कंसोल",
+"Q Console": "क्यू कंसोल",
+
+"Reports and Analytics": "रिपोर्ट्स और विश्लेषण",
+"Reports & Analytics": "रिपोर्ट्स और विश्लेषण",
+
+/* ===== Crop Selection ===== */
+
+"Select Crop": "फसल चुनें",
+"Select crop": "फसल चुनें",
+
+"Gram": "चना",
+"Lentil": "मसूर",
+"Maize": "मक्का",
+"Mustard": "सरसों",
+"Paddy": "धान",
+"Rice": "चावल",
+"Wheat": "गेहूँ",
+
+/* ===== Common Price Terms ===== */
+
+"Market Prices": "बाज़ार भाव",
+"Market Price": "बाज़ार भाव",
+"Price": "भाव",
+"Prices": "भाव"'Farmer login':'किसान लॉगिन','Staff login':'स्टाफ लॉगिन','Home / Farmer / My Profile':'होम / किसान / मेरी प्रोफ़ाइल','My profile':'मेरी प्रोफ़ाइल',
     '← Back home':'← होम पर वापस जाएँ','Back home':'होम पर वापस जाएँ','Home':'होम','Log out':'लॉग आउट','Dashboard':'डैशबोर्ड','Settings':'सेटिंग्स',
     'Queue management':'कतार प्रबंधन','Status management':'स्थिति प्रबंधन','Reports':'रिपोर्ट','Reports and Analytics':'रिपोर्ट और विश्लेषण',
     'Notifications':'सूचनाएँ','Alerts & centre announcements':'अलर्ट और केंद्र घोषणाएँ','Live queue':'लाइव कतार','Centre finder':'केंद्र खोजें',
