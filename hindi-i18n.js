@@ -1,7 +1,9 @@
 /* Kisan Queue - shared, bidirectional Hindi/English translation layer. */
 (function () {
   'use strict';
+
   var KEY = 'kq_language';
+
   var DICT = {
     'English':'English','हिंदी':'हिंदी','हिन्दी':'हिन्दी','Hindi':'हिंदी',
     'Farmer login':'किसान लॉगिन','Staff login':'स्टाफ लॉगिन','Home / Farmer / My Profile':'होम / किसान / मेरी प्रोफ़ाइल','My profile':'मेरी प्रोफ़ाइल',
@@ -41,9 +43,12 @@
   };
 
   var reverse = Object.create(null);
+
   Object.keys(DICT).forEach(function (en) {
     var hi = DICT[en];
-    if (hi && hi !== en && !reverse[hi]) reverse[hi] = en;
+    if (hi && hi !== en && !reverse[hi]) {
+      reverse[hi] = en;
+    }
   });
 
   var originalText = new WeakMap();
@@ -51,236 +56,463 @@
   var knownNodes = new WeakSet();
   var scheduled = false;
 
-  function norm(s) { return String(s == null ? '' : s).replace(/\s+/g, ' ').trim(); }
+  function norm(s) {
+    return String(s == null ? '' : s)
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
   function direct(s, lang) {
     var n = norm(s);
+
     if (!n) return s;
+
     if (lang === 'hi') {
-      if (DICT[n] !== undefined) return DICT[n];
-      return s.replace(/Kisan Procurement Centre/g,'किसान खरीद केंद्र').replace(/Procurement Centre/g,'खरीद केंद्र').replace(/procurement centre/g,'खरीद केंद्र');
+      if (DICT[n] !== undefined) {
+        return DICT[n];
+      }
+
+      return s
+        .replace(/Kisan Procurement Centre/g, 'किसान खरीद केंद्र')
+        .replace(/Procurement Centre/g, 'खरीद केंद्र')
+        .replace(/procurement centre/g, 'खरीद केंद्र');
     }
-    if (reverse[n] !== undefined) return reverse[n];
-    return s.replace(/किसान खरीद केंद्र/g,'Kisan Procurement Centre').replace(/खरीद केंद्र/g,'Procurement Centre');
+
+    if (reverse[n] !== undefined) {
+      return reverse[n];
+    }
+
+    return s
+      .replace(/किसान खरीद केंद्र/g, 'Kisan Procurement Centre')
+      .replace(/खरीद केंद्र/g, 'Procurement Centre');
   }
 
   function remember(el) {
     if (!el || originalAttrs.has(el)) return;
+
     originalAttrs.set(el, {
-      placeholder: el.hasAttribute('placeholder') ? el.getAttribute('placeholder') : null,
-      aria: el.hasAttribute('aria-label') ? el.getAttribute('aria-label') : null,
-      title: el.hasAttribute('title') ? el.getAttribute('title') : null,
-      value: (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') ? el.value : null
+      placeholder: el.hasAttribute('placeholder')
+        ? el.getAttribute('placeholder')
+        : null,
+
+      aria: el.hasAttribute('aria-label')
+        ? el.getAttribute('aria-label')
+        : null,
+
+      title: el.hasAttribute('title')
+        ? el.getAttribute('title')
+        : null,
+
+      value:
+        (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')
+          ? el.value
+          : null
     });
   }
 
   function capture(root, currentLang) {
     if (!root) return;
+
     currentLang = currentLang || 'en';
-    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+
+    var walker = document.createTreeWalker(
+      root,
+      NodeFilter.SHOW_TEXT
+    );
+
     var t;
+
     while ((t = walker.nextNode())) {
       var p = t.parentElement;
-      if (!p || /^(SCRIPT|STYLE|NOSCRIPT)$/i.test(p.tagName)) continue;
-      if (!originalText.has(t)) originalText.set(t, currentLang === 'hi' ? direct(t.nodeValue, 'en') : t.nodeValue);
+
+      if (
+        !p ||
+        /^(SCRIPT|STYLE|NOSCRIPT)$/i.test(p.tagName)
+      ) {
+        continue;
+      }
+
+      if (!originalText.has(t)) {
+        originalText.set(
+          t,
+          currentLang === 'hi'
+            ? direct(t.nodeValue, 'en')
+            : t.nodeValue
+        );
+      }
+
       knownNodes.add(t);
     }
-    var els = root.nodeType === 1 ? [root].concat(Array.from(root.querySelectorAll('input[placeholder],textarea[placeholder],[aria-label],[title]'))) : [];
+
+    var els =
+      root.nodeType === 1
+        ? [root].concat(
+            Array.from(
+              root.querySelectorAll(
+                'input[placeholder],textarea[placeholder],[aria-label],[title]'
+              )
+            )
+          )
+        : [];
+
     els.forEach(remember);
   }
 
   function translateRoot(root, lang) {
     if (!root) return;
+
     capture(root, lang);
-    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+
+    var walker = document.createTreeWalker(
+      root,
+      NodeFilter.SHOW_TEXT
+    );
+
     var t;
+
     while ((t = walker.nextNode())) {
       var p = t.parentElement;
-      if (!p || /^(SCRIPT|STYLE|NOSCRIPT)$/i.test(p.tagName)) continue;
+
+      if (
+        !p ||
+        /^(SCRIPT|STYLE|NOSCRIPT)$/i.test(p.tagName)
+      ) {
+        continue;
+      }
+
+      /*
+       * Never translate the language selector itself.
+       */
+      if (p.closest && p.closest('.kq-i18n-control')) {
+        continue;
+      }
+
       var base = originalText.get(t);
-      if (base === undefined) { originalText.set(t, t.nodeValue); base = t.nodeValue; }
-      t.nodeValue = lang === 'hi' ? direct(base, 'hi') : direct(base, 'en');
+
+      if (base === undefined) {
+        originalText.set(t, t.nodeValue);
+        base = t.nodeValue;
+      }
+
+      t.nodeValue =
+        lang === 'hi'
+          ? direct(base, 'hi')
+          : direct(base, 'en');
     }
-    var els = root.nodeType === 1 ? [root].concat(Array.from(root.querySelectorAll('input[placeholder],textarea[placeholder],[aria-label],[title]'))) : [];
+
+    var els =
+      root.nodeType === 1
+        ? [root].concat(
+            Array.from(
+              root.querySelectorAll(
+                'input[placeholder],textarea[placeholder],[aria-label],[title]'
+              )
+            )
+          )
+        : [];
+
     els.forEach(function (el) {
+      if (
+        el.closest &&
+        el.closest('.kq-i18n-control')
+      ) {
+        return;
+      }
+
       remember(el);
+
       var a = originalAttrs.get(el);
+
       if (!a) return;
-      if (a.placeholder !== null) el.placeholder = lang === 'hi' ? direct(a.placeholder,'hi') : direct(a.placeholder,'en');
-      if (a.aria !== null) el.setAttribute('aria-label', lang === 'hi' ? direct(a.aria,'hi') : direct(a.aria,'en'));
-      if (a.title !== null) el.title = lang === 'hi' ? direct(a.title,'hi') : direct(a.title,'en');
+
+      if (a.placeholder !== null) {
+        el.placeholder =
+          lang === 'hi'
+            ? direct(a.placeholder, 'hi')
+            : direct(a.placeholder, 'en');
+      }
+
+      if (a.aria !== null) {
+        el.setAttribute(
+          'aria-label',
+          lang === 'hi'
+            ? direct(a.aria, 'hi')
+            : direct(a.aria, 'en')
+        );
+      }
+
+      if (a.title !== null) {
+        el.title =
+          lang === 'hi'
+            ? direct(a.title, 'hi')
+            : direct(a.title, 'en');
+      }
     });
   }
 
   function apply(lang, root) {
     lang = lang === 'hi' ? 'hi' : 'en';
+
     localStorage.setItem(KEY, lang);
-    translateRoot(root || document.body, lang);
+
+    translateRoot(
+      root || document.body,
+      lang
+    );
+
     document.documentElement.lang = lang;
-    document.querySelectorAll('#languageSelect,#langSelect').forEach(function (s) { if (s.value !== lang) s.value = lang; });
+
+    document
+      .querySelectorAll('#languageSelect,#langSelect')
+      .forEach(function (s) {
+        if (s.value !== lang) {
+          s.value = lang;
+        }
+      });
   }
-
-function attachControl() {
-  var sel =
-    document.getElementById('languageSelect') ||
-    document.getElementById('langSelect');
-
-  if (sel) return;
-
-  var wrap = document.createElement('div');
-  wrap.className = 'kq-i18n-control';
-
-  var select = document.createElement('select');
-  select.id = 'languageSelect';
-  select.setAttribute('aria-label', 'Language');
-
-  select.innerHTML =
-    '<option value="en">English</option>' +
-    '<option value="hi">हिन्दी</option>';
-
-  wrap.appendChild(select);
-  document.body.appendChild(wrap);
-
-  select.addEventListener('change', function () {
-    apply(select.value);
-  });
-    }
-
-    return;
-  }
-
-  var wrap = document.createElement('div');
-  wrap.className = 'kq-i18n-control';
-
-  var select = document.createElement('select');
-  select.id = 'languageSelect';
-  select.setAttribute('aria-label', 'Language');
-
-  select.innerHTML =
-    '<option value="en">English</option>' +
-    '<option value="hi">हिन्दी</option>';
-
-  wrap.appendChild(select);
-  document.body.appendChild(wrap);
-
-  select.addEventListener('change', function () {
-    apply(select.value);
-  });
 
   /*
-   * The visible button is the globe.
-   * Clicking the globe opens the real language selector.
+   * Creates the small bottom-left language button.
+   *
+   * The actual <select> remains on top of the globe,
+   * but is transparent. Therefore the browser still
+   * handles the normal dropdown when the globe is clicked.
    */
-  wrap.addEventListener('click', function (e) {
-    if (e.target !== select) {
-      select.focus();
+  function attachControl() {
+    var existing =
+      document.querySelector('.kq-i18n-control');
 
-      if (typeof select.showPicker === 'function') {
-        select.showPicker();
-      } else {
-        select.click();
+    var sel =
+      document.getElementById('languageSelect') ||
+      document.getElementById('langSelect');
+
+    /*
+     * If a language selector already exists on the page,
+     * don't create another one.
+     */
+    if (sel) {
+      var existingWrap =
+        sel.closest('.kq-i18n-control');
+
+      if (existingWrap) {
+        return;
       }
+
+      return;
     }
-  });
-}
-    if (existing) return;
-    var box = document.createElement('div');
-    box.className = 'kq-i18n-control';
-    box.innerHTML = '<label>भाषा / Language</label><select aria-label="Language"><option value="en">English</option><option value="hi">हिंदी</option></select>';
-    document.body.appendChild(box);
-    box.querySelector('select').addEventListener('change', function () { apply(this.value); });
+
+    /*
+     * Remove any old/duplicate language controls.
+     */
+    if (existing) {
+      existing.remove();
+    }
+
+    var wrap =
+      document.createElement('div');
+
+    wrap.className =
+      'kq-i18n-control';
+
+    var select =
+      document.createElement('select');
+
+    select.id =
+      'languageSelect';
+
+    select.setAttribute(
+      'aria-label',
+      'Language'
+    );
+
+    select.innerHTML =
+      '<option value="en">English</option>' +
+      '<option value="hi">हिन्दी</option>';
+
+    wrap.appendChild(select);
+
+    document.body.appendChild(wrap);
+
+    select.addEventListener(
+      'change',
+      function () {
+        apply(select.value);
+      }
+    );
   }
 
   function init() {
-    // Capture the canonical DOM while it is still English. This is the key fix for Hindi -> English.
-    capture(document.body, 'en');
+    /*
+     * Capture the canonical DOM while it is still English.
+     * This is important for Hindi -> English switching.
+     */
+    capture(
+      document.body,
+      'en'
+    );
+
     attachControl();
-    apply(localStorage.getItem(KEY) || 'en');
 
-   var mo = new MutationObserver(function (mutations) {
-  var lang = localStorage.getItem(KEY) || 'en';
-  var added = [];
-  var changed = [];
+    apply(
+      localStorage.getItem(KEY) || 'en'
+    );
 
-  mutations.forEach(function (m) {
+    /*
+     * Watch dynamically-created content.
+     *
+     * This fixes pages where JavaScript changes
+     * textContent after the page has loaded.
+     */
+    var mo =
+      new MutationObserver(
+        function (mutations) {
+          var lang =
+            localStorage.getItem(KEY) || 'en';
 
-    // Newly added elements
-    m.addedNodes.forEach(function (n) {
-      if (
-        n.nodeType === Node.ELEMENT_NODE &&
-        !n.classList.contains('kq-i18n-control')
-      ) {
-        capture(n, lang);
-        added.push(n);
-      }
+          var added = [];
+          var changed = [];
 
-      // IMPORTANT:
-      // textContent changes create TEXT_NODEs (nodeType 3)
-      if (n.nodeType === Node.TEXT_NODE) {
-        var parent = n.parentElement;
+          mutations.forEach(
+            function (m) {
 
-        if (
-          parent &&
-          !parent.closest('.kq-i18n-control')
-        ) {
-          changed.push(parent);
+              /*
+               * Newly-added elements.
+               */
+              m.addedNodes.forEach(
+                function (n) {
+
+                  if (
+                    n.nodeType === Node.ELEMENT_NODE &&
+                    !n.classList.contains(
+                      'kq-i18n-control'
+                    )
+                  ) {
+                    capture(n, lang);
+                    added.push(n);
+                  }
+
+                  /*
+                   * textContent changes create
+                   * TEXT_NODEs.
+                   */
+                  if (
+                    n.nodeType === Node.TEXT_NODE
+                  ) {
+                    var parent =
+                      n.parentElement;
+
+                    if (
+                      parent &&
+                      !parent.closest(
+                        '.kq-i18n-control'
+                      )
+                    ) {
+                      changed.push(parent);
+                    }
+                  }
+                }
+              );
+
+              /*
+               * Detect characterData changes.
+               */
+              if (
+                m.type === 'characterData'
+              ) {
+                var parent =
+                  m.target.parentElement;
+
+                if (
+                  parent &&
+                  !parent.closest(
+                    '.kq-i18n-control'
+                  )
+                ) {
+                  changed.push(parent);
+                }
+              }
+
+              /*
+               * Detect placeholder,
+               * title and aria-label changes.
+               */
+              if (
+                m.type === 'attributes'
+              ) {
+                if (
+                  m.target &&
+                  !m.target.closest(
+                    '.kq-i18n-control'
+                  )
+                ) {
+                  changed.push(m.target);
+                }
+              }
+            }
+          );
+
+          if (
+            (!added.length &&
+              !changed.length) ||
+            scheduled
+          ) {
+            return;
+          }
+
+          scheduled = true;
+
+          requestAnimationFrame(
+            function () {
+              scheduled = false;
+
+              added.forEach(
+                function (n) {
+                  translateRoot(
+                    n,
+                    lang
+                  );
+                }
+              );
+
+              changed.forEach(
+                function (el) {
+                  translateRoot(
+                    el,
+                    lang
+                  );
+                }
+              );
+            }
+          );
         }
+      );
+
+    mo.observe(
+      document.body,
+      {
+        childList: true,
+        subtree: true,
+        characterData: true,
+        attributes: true,
+        attributeFilter: [
+          'placeholder',
+          'title',
+          'aria-label'
+        ]
       }
-    });
-
-    // IMPORTANT:
-    // Detect element.textContent / node.nodeValue changes
-    if (m.type === 'characterData') {
-      var parent = m.target.parentElement;
-
-      if (
-        parent &&
-        !parent.closest('.kq-i18n-control')
-      ) {
-        changed.push(parent);
-      }
-    }
-
-    // Detect placeholder/title/aria-label changes
-    if (m.type === 'attributes') {
-      if (
-        m.target &&
-        !m.target.closest('.kq-i18n-control')
-      ) {
-        changed.push(m.target);
-      }
-    }
-  });
-
-  if ((!added.length && !changed.length) || scheduled) return;
-
-  scheduled = true;
-
-  requestAnimationFrame(function () {
-    scheduled = false;
-
-    added.forEach(function (n) {
-      translateRoot(n, lang);
-    });
-
-    changed.forEach(function (el) {
-      translateRoot(el, lang);
-    });
-  });
-});
-
-mo.observe(document.body, {
-  childList: true,
-  subtree: true,
-  characterData: true,
-  attributes: true,
-  attributeFilter: [
-    'placeholder',
-    'title',
-    'aria-label'
-  ]
-});
+    );
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
-  else init();
+  if (
+    document.readyState === 'loading'
+  ) {
+    document.addEventListener(
+      'DOMContentLoaded',
+      init,
+      { once: true }
+    );
+  } else {
+    init();
+  }
+
 })();
