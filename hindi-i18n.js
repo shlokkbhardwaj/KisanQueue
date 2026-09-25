@@ -124,16 +124,25 @@ function attachControl() {
     document.getElementById('languageSelect') ||
     document.getElementById('langSelect');
 
-  if (sel) {
-    var existingControl = sel.closest('.kq-i18n-control');
+  if (sel) return;
 
-    if (existingControl) {
-      existingControl.addEventListener('click', function (e) {
-        if (e.target !== sel) {
-          sel.focus();
-          sel.click();
-        }
-      });
+  var wrap = document.createElement('div');
+  wrap.className = 'kq-i18n-control';
+
+  var select = document.createElement('select');
+  select.id = 'languageSelect';
+  select.setAttribute('aria-label', 'Language');
+
+  select.innerHTML =
+    '<option value="en">English</option>' +
+    '<option value="hi">हिन्दी</option>';
+
+  wrap.appendChild(select);
+  document.body.appendChild(wrap);
+
+  select.addEventListener('change', function () {
+    apply(select.value);
+  });
     }
 
     return;
