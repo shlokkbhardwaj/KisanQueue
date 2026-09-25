@@ -119,13 +119,60 @@
     document.querySelectorAll('#languageSelect,#langSelect').forEach(function (s) { if (s.value !== lang) s.value = lang; });
   }
 
-  function attachControl() {
-    var existing = document.querySelector('#languageSelect,#langSelect');
-    if (existing && !existing.dataset.kqI18nBound) {
-      existing.dataset.kqI18nBound = '1';
-      existing.addEventListener('change', function () { apply(this.value); });
-      return;
+function attachControl() {
+  var sel =
+    document.getElementById('languageSelect') ||
+    document.getElementById('langSelect');
+
+  if (sel) {
+    var existingControl = sel.closest('.kq-i18n-control');
+
+    if (existingControl) {
+      existingControl.addEventListener('click', function (e) {
+        if (e.target !== sel) {
+          sel.focus();
+          sel.click();
+        }
+      });
     }
+
+    return;
+  }
+
+  var wrap = document.createElement('div');
+  wrap.className = 'kq-i18n-control';
+
+  var select = document.createElement('select');
+  select.id = 'languageSelect';
+  select.setAttribute('aria-label', 'Language');
+
+  select.innerHTML =
+    '<option value="en">English</option>' +
+    '<option value="hi">हिन्दी</option>';
+
+  wrap.appendChild(select);
+  document.body.appendChild(wrap);
+
+  select.addEventListener('change', function () {
+    apply(select.value);
+  });
+
+  /*
+   * The visible button is the globe.
+   * Clicking the globe opens the real language selector.
+   */
+  wrap.addEventListener('click', function (e) {
+    if (e.target !== select) {
+      select.focus();
+
+      if (typeof select.showPicker === 'function') {
+        select.showPicker();
+      } else {
+        select.click();
+      }
+    }
+  });
+}
     if (existing) return;
     var box = document.createElement('div');
     box.className = 'kq-i18n-control';
