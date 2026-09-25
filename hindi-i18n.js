@@ -1,75 +1,88 @@
 ```javascript
+/* ============================================================
+   KISAN QUEUE
+   COMPLETE HINDI / ENGLISH TRANSLATION SYSTEM
+
+   Fixes:
+   - Globe language icon
+   - Hindi / English switching
+   - Mixed English + Hindi
+   - Dynamic JavaScript text
+   - Buttons
+   - Placeholders
+   - Titles
+   - aria-label
+   - Farmer pages
+   - Staff pages
+   - Reports
+   - Queue console
+   - Alerts
+   - Settings
+   ============================================================ */
+
 (function () {
   'use strict';
 
-  /*
-   * ============================================================
-   * KISAN QUEUE
-   * Hindi / English Language System
-   * Complete replacement version
-   * ============================================================
-   */
+  var KEY = 'kq_language';
 
-  var STORAGE_KEY = 'kisanQueueLanguage';
+  /* ============================================================
+     TRANSLATION DICTIONARY
+     ============================================================ */
 
   var DICT = {
 
-    /* =========================================================
-       LANGUAGE
-       ========================================================= */
+    /* ---------- LANGUAGE ---------- */
 
-    'English': 'अंग्रेज़ी',
+    'English': 'English',
     'Hindi': 'हिंदी',
-    'हिंदी (Hindi)': 'हिंदी',
+    'Hindi (Hindi)': 'हिंदी',
+    'हिंदी': 'हिंदी',
+    'हिन्दी': 'हिन्दी',
     'Language': 'भाषा',
     'Display language': 'डिस्प्ले भाषा',
 
-    /* =========================================================
-       MAIN NAVIGATION
-       ========================================================= */
+    /* ---------- MAIN NAVIGATION ---------- */
 
     'Home': 'होम',
-    'Landing Home': 'मुख्य पृष्ठ',
     'Farmer Portal': 'किसान पोर्टल',
     'Farmer login': 'किसान लॉगिन',
     'Farmer Login': 'किसान लॉगिन',
     'Staff login': 'स्टाफ लॉगिन',
     'Staff Login': 'स्टाफ लॉगिन',
-
     'Farmer Registration': 'किसान पंजीकरण',
     'Slot Booking': 'स्लॉट बुकिंग',
-    'Alerts': 'सूचनाएँ',
     'Operation Staff': 'ऑपरेशन स्टाफ',
     'Operation Dashboard': 'ऑपरेशन डैशबोर्ड',
-    'Operations Dashboard': 'ऑपरेशंस डैशबोर्ड',
     'Queue Console': 'कतार कंसोल',
     'Q Console': 'क्यू कंसोल',
     'Reports & Analytics': 'रिपोर्ट्स और विश्लेषण',
     'Reports and Analytics': 'रिपोर्ट्स और विश्लेषण',
     'Settings': 'सेटिंग्स',
     'Notifications': 'सूचनाएँ',
+    'Alerts': 'अलर्ट',
+    'Log out': 'लॉग आउट',
+    'Logout': 'लॉग आउट',
+    'Login': 'लॉगिन',
 
-    /* =========================================================
-       LANDING PAGE
-       ========================================================= */
+    /* ---------- LANDING PAGE ---------- */
 
     'Procurement Portal — Book Your Slot':
       'खरीद पोर्टल — अपना स्लॉट बुक करें',
 
-    'Procurement Portal':
-      'खरीद पोर्टल',
-
     'SIH26032 · Procurement made simple':
-      'SIH26032 · खरीद को आसान बनाया गया',
+      'SIH26032 · खरीद को आसान बनाना',
 
     'Book your procurement slot. Skip the wait.':
       'अपना खरीद स्लॉट बुक करें। इंतज़ार से बचें।',
 
-    'Check my status':
-      'मेरी स्थिति देखें',
+    'No more standing in line for hours without knowing when your turn will come. Book a slot, get a token, and track your status — all from your phone.':
+      'अब अपनी बारी का इंतज़ार करते हुए घंटों लाइन में खड़े रहने की जरूरत नहीं। स्लॉट बुक करें, टोकन प्राप्त करें और अपने फोन से अपनी स्थिति देखें।',
 
     'Start booking →':
       'बुकिंग शुरू करें →',
+
+    'Check my status':
+      'मेरी स्थिति देखें',
 
     'Already have a token? Use "Check my status" to see your queue position.':
       'क्या आपके पास पहले से टोकन है? अपनी कतार स्थिति देखने के लिए "मेरी स्थिति देखें" चुनें।',
@@ -80,30 +93,43 @@
     'Your nearest procurement centre · Live queue updates':
       'आपका निकटतम खरीद केंद्र · लाइव कतार अपडेट',
 
-    'How it works':
-      'यह कैसे काम करता है',
-
-    'Register once':
-      'एक बार पंजीकरण करें',
-
-    'Book a slot':
-      'स्लॉट बुक करें',
-
-    'Track your status':
-      'अपनी स्थिति ट्रैक करें',
-
     'Find centre':
       'केंद्र खोजें',
 
     'Find a centre':
       'केंद्र खोजें',
 
-    'Find a Centre':
-      'केंद्र खोजें',
+    'How it works':
+      'यह कैसे काम करता है',
 
-    /* =========================================================
-       MARKET PRICES
-       ========================================================= */
+    'Register once':
+      'एक बार पंजीकरण करें',
+
+    'Add your details and preferred procurement centre — takes less than two minutes.':
+      'अपनी जानकारी और पसंदीदा खरीद केंद्र जोड़ें — इसमें दो मिनट से भी कम समय लगता है।',
+
+    'Book a slot':
+      'स्लॉट बुक करें',
+
+    'Pick a centre, date, and time that works for you. Get an instant digital token.':
+      'अपने लिए सुविधाजनक केंद्र, तारीख और समय चुनें। तुरंत डिजिटल टोकन प्राप्त करें।',
+
+    'Track your status':
+      'अपनी स्थिति ट्रैक करें',
+
+    'See your live queue position and procurement status — no need to call or ask around.':
+      'अपनी लाइव कतार स्थिति और खरीद की स्थिति देखें — कॉल करने या पूछताछ करने की जरूरत नहीं।',
+
+    'SIH26032 · Farmer Procurement Portal — a project for smoother, fairer procurement.':
+      'SIH26032 · किसान खरीद पोर्टल — सरल और पारदर्शी खरीद के लिए एक परियोजना।',
+
+    'Farmer helpline (toll-free):':
+      'किसान हेल्पलाइन (टोल-फ्री):',
+
+    'Unable to log in or register? Call our farmer helpline (toll-free):':
+      'लॉगिन या पंजीकरण में परेशानी? हमारी किसान हेल्पलाइन (टोल-फ्री) पर कॉल करें:',
+
+    /* ---------- MARKET PRICES ---------- */
 
     'MANDI MARKET':
       'मंडी बाज़ार',
@@ -111,10 +137,25 @@
     "Today's Market Prices":
       'आज के बाज़ार भाव',
 
+    "Today's Market Price":
+      'आज का बाज़ार भाव',
+
+    'Market':
+      'बाज़ार',
+
+    'Markets':
+      'बाज़ार',
+
+    'Market Price':
+      'बाज़ार भाव',
+
     'Market Prices':
       'बाज़ार भाव',
 
-    'Market Price':
+    'Market price':
+      'बाज़ार भाव',
+
+    'Market prices':
       'बाज़ार भाव',
 
     'Price':
@@ -123,21 +164,31 @@
     'Prices':
       'भाव',
 
+    'Crop prices':
+      'फसल के भाव',
+
+    'Current market price':
+      'वर्तमान बाज़ार भाव',
+
+    "Today's price":
+      'आज का भाव',
+
+    'per quintal':
+      'प्रति क्विंटल',
+
+    'Per quintal':
+      'प्रति क्विंटल',
+
     'Check indicative crop prices before planning your visit.':
       'अपनी यात्रा की योजना बनाने से पहले फसल के अनुमानित भाव देखें।',
 
     'Updated today':
       'आज अपडेट किया गया',
 
-    'per quintal':
-      'प्रति क्विंटल',
-
     'Prices shown are indicative/demo values for the prototype. Connect an official mandi-price source before presenting them as live market prices.':
       'दिखाए गए भाव प्रोटोटाइप के लिए अनुमानित/डेमो मूल्य हैं। इन्हें लाइव बाज़ार भाव के रूप में दिखाने से पहले आधिकारिक मंडी-भाव स्रोत से कनेक्ट करें।',
 
-    /* =========================================================
-       CROPS
-       ========================================================= */
+    /* ---------- CROPS ---------- */
 
     'Select Crop':
       'फसल चुनें',
@@ -154,6 +205,12 @@
     'Crop / produce type':
       'फसल / उपज का प्रकार',
 
+    'Paddy':
+      'धान',
+
+    'Rice':
+      'चावल',
+
     'Wheat':
       'गेहूँ',
 
@@ -163,20 +220,14 @@
     'Mustard':
       'सरसों',
 
-    'Paddy':
-      'धान',
-
-    'Rice':
-      'चावल',
-
     'Gram':
+      'चना',
+
+    'Chickpea':
       'चना',
 
     'Lentil':
       'मसूर',
-
-    'Chickpea':
-      'चना',
 
     'Bajra':
       'बाजरा',
@@ -235,9 +286,7 @@
     'Mango':
       'आम',
 
-    /* =========================================================
-       FARMER REGISTRATION
-       ========================================================= */
+    /* ---------- FARMER REGISTRATION ---------- */
 
     'My Profile - Kisan Queue Farmer Queue':
       'मेरी प्रोफ़ाइल - किसान क्यू',
@@ -248,6 +297,9 @@
     'My profile':
       'मेरी प्रोफ़ाइल',
 
+    'Register your farmer details to access procurement centre services.':
+      'खरीद केंद्र की सेवाओं का उपयोग करने के लिए अपने किसान विवरण दर्ज करें।',
+
     'Profile completion':
       'प्रोफ़ाइल पूर्णता',
 
@@ -257,14 +309,26 @@
     'Enter your details carefully. Select your crop and quantity first to find suitable procurement centres.':
       'अपनी जानकारी सावधानी से भरें। उपयुक्त खरीद केंद्र खोजने के लिए पहले फसल और मात्रा चुनें।',
 
+    'NAME':
+      'नाम',
+
     'Full name':
       'पूरा नाम',
+
+    'MOBILE':
+      'मोबाइल',
 
     'Mobile number':
       'मोबाइल नंबर',
 
+    'VILLAGE':
+      'गाँव',
+
     'Village':
       'गाँव',
+
+    'DISTRICT':
+      'जिला',
 
     'District':
       'जिला',
@@ -296,17 +360,29 @@
     'Procurement Centre':
       'खरीद केंद्र',
 
+    'procurement centre':
+      'खरीद केंद्र',
+
+    'Kisan Procurement Centre':
+      'किसान खरीद केंद्र',
+
     'Select crop and quantity first':
       'पहले फसल और मात्रा चुनें',
 
     'Only centres accepting your selected crop will be shown.':
       'केवल आपकी चुनी हुई फसल स्वीकार करने वाले केंद्र दिखाए जाएंगे।',
 
+    'FARMER ID':
+      'किसान आईडी',
+
     'Farmer ID':
       'किसान आईडी',
 
     'Leave blank if you do not have one.':
       'यदि आपके पास नहीं है तो खाली छोड़ें।',
+
+    'PASSWORD (hashed on the server; never stored in the browser)':
+      'पासवर्ड (सर्वर पर सुरक्षित रूप से हैश किया जाता है; ब्राउज़र में संग्रहीत नहीं होता)',
 
     'Password':
       'पासवर्ड',
@@ -329,9 +405,6 @@
     'Log in':
       'लॉगिन करें',
 
-    'Login':
-      'लॉगिन',
-
     'Cancel':
       'रद्द करें',
 
@@ -353,18 +426,16 @@
     'Edit profile':
       'प्रोफ़ाइल संपादित करें',
 
-    /* =========================================================
-       FARMER LOGIN
-       ========================================================= */
+    /* ---------- FARMER LOGIN ---------- */
+
+    'Farmer Login - Kisan Queue Farmer Queue':
+      'किसान लॉगिन - किसान क्यू',
 
     '← Back home':
       '← होम पर वापस जाएँ',
 
     'Back home':
       'होम पर वापस जाएँ',
-
-    'Farmer Login - Kisan Queue Farmer Queue':
-      'किसान लॉगिन - किसान क्यू',
 
     'Log in with your mobile number and password to book a slot, see your token and check the queue.':
       'स्लॉट बुक करने, अपना टोकन देखने और कतार जाँचने के लिए मोबाइल नंबर और पासवर्ड से लॉगिन करें।',
@@ -381,9 +452,7 @@
     'Forgot your password? Please contact your procurement centre or helpline to have it reset.':
       'पासवर्ड भूल गए? इसे रीसेट कराने के लिए अपने खरीद केंद्र या हेल्पलाइन से संपर्क करें।',
 
-    /* =========================================================
-       SLOT BOOKING
-       ========================================================= */
+    /* ---------- SLOT BOOKING ---------- */
 
     'Book a Slot — Procurement Portal':
       'स्लॉट बुक करें — खरीद पोर्टल',
@@ -406,8 +475,14 @@
     '📍 Use my location':
       '📍 मेरी लोकेशन का उपयोग करें',
 
+    'Use my location':
+      'मेरी लोकेशन का उपयोग करें',
+
     'Choose manually':
       'मैन्युअल रूप से चुनें',
+
+    'Search manually':
+      'मैन्युअल रूप से खोजें',
 
     'Choose a date':
       'तारीख चुनें',
@@ -454,9 +529,7 @@
     'Confirm booking':
       'बुकिंग की पुष्टि करें',
 
-    /* =========================================================
-       BOOKING TOKEN
-       ========================================================= */
+    /* ---------- BOOKING TOKEN ---------- */
 
     'Your Token — Procurement Portal':
       'आपका टोकन — खरीद पोर्टल',
@@ -466,6 +539,15 @@
 
     'Loading your booking...':
       'आपकी बुकिंग लोड हो रही है...',
+
+    'Loading your booking':
+      'आपकी बुकिंग लोड हो रही है',
+
+    'Loading…':
+      'लोड हो रहा है…',
+
+    'Loading...':
+      'लोड हो रहा है...',
 
     'Copy':
       'कॉपी करें',
@@ -524,9 +606,7 @@
     'You do not have a booking yet.':
       'आपकी अभी कोई बुकिंग नहीं है।',
 
-    /* =========================================================
-       PROCUREMENT STATUS
-       ========================================================= */
+    /* ---------- PROCUREMENT STATUS ---------- */
 
     'My Procurement Status — Procurement Portal':
       'मेरी खरीद स्थिति — खरीद पोर्टल',
@@ -536,6 +616,9 @@
 
     'Loading your status...':
       'आपकी स्थिति लोड हो रही है...',
+
+    'Tokens ahead of you':
+      'आपसे आगे टोकन',
 
     'No active booking':
       'कोई सक्रिय बुकिंग नहीं',
@@ -549,15 +632,22 @@
     'Check your internet connection and try again.':
       'अपना इंटरनेट कनेक्शन जाँचें और फिर प्रयास करें।',
 
+    'Check your connection and try again.':
+      'अपना कनेक्शन जाँचें और फिर प्रयास करें।',
+
     'Retry':
       'पुनः प्रयास करें',
 
-    /* =========================================================
-       FARMER DASHBOARD
-       ========================================================= */
+    /* ---------- FARMER DASHBOARD ---------- */
 
     'My Dashboard — SIH26032 Procurement Portal':
       'मेरा डैशबोर्ड — SIH26032 खरीद पोर्टल',
+
+    'Suresh Yadav':
+      'सुरेश यादव',
+
+    'Kheri Village':
+      'खेड़ी गाँव',
 
     'Namaste':
       'नमस्ते',
@@ -580,15 +670,22 @@
     'Payment status':
       'भुगतान स्थिति',
 
+    'Book a slot':
+      'स्लॉट बुक करें',
+
     'View token':
       'टोकन देखें',
+
+    'Live queue':
+      'लाइव कतार',
+
+    'Find a centre':
+      'केंद्र खोजें',
 
     'Recent activity':
       'हाल की गतिविधि',
 
-    /* =========================================================
-       CENTRE FINDER
-       ========================================================= */
+    /* ---------- CENTRE FINDER ---------- */
 
     'Find a Centre — Farmer Queue':
       'केंद्र खोजें — किसान क्यू',
@@ -614,9 +711,7 @@
     'Turn on location access in your browser settings, or search by village or district instead.':
       'अपने ब्राउज़र की सेटिंग्स में लोकेशन की अनुमति दें, या इसके बजाय गाँव या जिले से खोजें।',
 
-    /* =========================================================
-       LIVE QUEUE
-       ========================================================= */
+    /* ---------- LIVE QUEUE ---------- */
 
     'Live Queue — Farmer Queue':
       'लाइव कतार — किसान क्यू',
@@ -636,12 +731,13 @@
     'Open my token':
       'मेरा टोकन खोलें',
 
-    /* =========================================================
-       NOTIFICATIONS
-       ========================================================= */
+    /* ---------- NOTIFICATIONS ---------- */
 
     'Notifications — Farmer Queue':
       'सूचनाएँ — किसान क्यू',
+
+    'Notifications':
+      'सूचनाएँ',
 
     'Mark all as read':
       'सभी को पढ़ा हुआ चिह्नित करें',
@@ -667,9 +763,7 @@
     "Couldn't load notifications":
       'सूचनाएँ लोड नहीं हो सकीं',
 
-    /* =========================================================
-       ALERTS
-       ========================================================= */
+    /* ---------- ALERTS ---------- */
 
     'Alerts — Farmer Queue':
       'अलर्ट — किसान क्यू',
@@ -686,14 +780,20 @@
     'Centre announcements will appear here':
       'केंद्र की घोषणाएँ यहाँ दिखाई देंगी',
 
+    'Bookings are being redirected to Counters 1 and 2 — expect slightly longer waits today.':
+      'बुकिंग काउंटर 1 और 2 पर भेजी जा रही हैं — आज थोड़ा अधिक इंतज़ार हो सकता है।',
+
+    'Live centre announcements are not configured yet':
+      'लाइव केंद्र घोषणाएँ अभी कॉन्फ़िगर नहीं हैं',
+
     'Weather advisory':
       'मौसम सलाह',
 
     'Medium':
       'मध्यम',
 
-    'Low':
-      'कम',
+    'No centre-specific alert is currently published.':
+      'फिलहाल इस केंद्र के लिए कोई विशेष अलर्ट प्रकाशित नहीं है।',
 
     'Selected centre':
       'चयनित केंद्र',
@@ -701,27 +801,37 @@
     '2 hours ago':
       '2 घंटे पहले',
 
-    'Yesterday':
-      'कल',
-
-    '3 days ago':
-      '3 दिन पहले',
-
     'Timing change this week':
       'इस सप्ताह समय में बदलाव',
+
+    'Low':
+      'कम',
+
+    'Centre-specific closure notices will appear here when published by staff.':
+      'स्टाफ द्वारा प्रकाशित किए जाने पर केंद्र बंद रहने की सूचनाएँ यहाँ दिखाई देंगी।',
+
+    'Yesterday':
+      'कल',
 
     'New quality check process':
       'नई गुणवत्ता जाँच प्रक्रिया',
 
+    'Centres now use a faster two-step quality check — average wait times should improve.':
+      'केंद्र अब तेज़ दो-चरणीय गुणवत्ता जाँच का उपयोग करते हैं — औसत प्रतीक्षा समय कम होना चाहिए।',
+
     'All centres':
       'सभी केंद्र',
+
+    '3 days ago':
+      '3 दिन पहले',
 
     'No alerts right now':
       'अभी कोई अलर्ट नहीं है',
 
-    /* =========================================================
-       STAFF LOGIN
-       ========================================================= */
+    'Your procurement centres are running normally.':
+      'आपके खरीद केंद्र सामान्य रूप से चल रहे हैं।',
+
+    /* ---------- STAFF LOGIN ---------- */
 
     'Staff Login — SIH26032 Procurement Portal':
       'स्टाफ लॉगिन — SIH26032 खरीद पोर्टल',
@@ -731,6 +841,9 @@
 
     'Run the centre floor from one screen.':
       'एक ही स्क्रीन से केंद्र का संचालन करें।',
+
+    "Sign in to manage today's queue, update procurement status, and track centre performance. This login page is for centre staff only — for farmer login use the public app.":
+      'आज की कतार प्रबंधित करने, खरीद स्थिति अपडेट करने और केंद्र के प्रदर्शन को ट्रैक करने के लिए साइन इन करें। यह लॉगिन पेज केवल केंद्र स्टाफ के लिए है — किसान लॉगिन के लिए सार्वजनिक ऐप का उपयोग करें।',
 
     "Sign in to manage today's queue, update procurement status, and track centre performance.":
       'आज की कतार प्रबंधित करने, खरीद स्थिति अपडेट करने और केंद्र के प्रदर्शन को ट्रैक करने के लिए साइन इन करें।',
@@ -783,6 +896,9 @@
     'Staff accounts are created by an administrator. No passwords are stored in this page.':
       'स्टाफ खाते एडमिन द्वारा बनाए जाते हैं। इस पेज पर कोई पासवर्ड संग्रहीत नहीं किया जाता।',
 
+    'Simulate a session-expired redirect →':
+      'सत्र समाप्त होने के बाद रीडायरेक्ट का परीक्षण करें →',
+
     'Signed in':
       'साइन इन हो गया',
 
@@ -792,15 +908,13 @@
     'Redirecting to your dashboard...':
       'आपके डैशबोर्ड पर भेजा जा रहा है...',
 
-    /* =========================================================
-       OPERATIONS DASHBOARD
-       ========================================================= */
-
-    "Today's Operations":
-      'आज का संचालन',
+    /* ---------- OPERATIONS DASHBOARD ---------- */
 
     'Operations Dashboard — SIH26032 Procurement Portal':
       'ऑपरेशंस डैशबोर्ड — SIH26032 खरीद पोर्टल',
+
+    "Today's Operations":
+      'आज का संचालन',
 
     'Loaded':
       'लोड हो गया',
@@ -815,10 +929,13 @@
       'अलर्ट',
 
     'Counter 3 is offline — bookings are being redirected to Counters 1 and 2.':
-      'काउंटर 3 ऑफलाइन है — बुकिंग काउंटर 1 और 2 पर भेजी जा रही हैं।',
+      'काउंटर 3 बंद है — बुकिंग काउंटर 1 और 2 पर भेजी जा रही हैं।',
 
     'Bookings today':
       'आज की बुकिंग',
+
+    '12 more than yesterday':
+      'कल से 12 अधिक',
 
     'Farmers waiting':
       'प्रतीक्षा कर रहे किसान',
@@ -830,10 +947,13 @@
       'सक्रिय काउंटर',
 
     'Counter 3 offline':
-      'काउंटर 3 ऑफलाइन',
+      'काउंटर 3 बंद है',
 
     'Completed today':
       'आज पूर्ण',
+
+    "71% of today's bookings":
+      'आज की बुकिंग का 71%',
 
     'Pending cases':
       'लंबित मामले',
@@ -844,11 +964,23 @@
     'Bookings by hour':
       'घंटे के अनुसार बुकिंग',
 
+    'Pending cases':
+      'लंबित मामले',
+
+    'Weighing discrepancy':
+      'वजन में अंतर',
+
     'Issue':
       'समस्या',
 
+    'Awaiting quality check':
+      'गुणवत्ता जाँच की प्रतीक्षा',
+
     'Pending':
       'लंबित',
+
+    'Payment not confirmed':
+      'भुगतान की पुष्टि नहीं हुई',
 
     'No bookings yet today':
       'आज अभी कोई बुकिंग नहीं है',
@@ -856,9 +988,7 @@
     "Once farmers start booking slots at the selected procurement centre, they'll show up here.":
       'चयनित खरीद केंद्र पर किसान स्लॉट बुक करना शुरू करेंगे तो वे यहाँ दिखाई देंगे।',
 
-    /* =========================================================
-       QUEUE CONSOLE
-       ========================================================= */
+    /* ---------- QUEUE CONSOLE ---------- */
 
     'Queue Management — SIH26032 Procurement Portal':
       'कतार प्रबंधन — SIH26032 खरीद पोर्टल',
@@ -871,6 +1001,9 @@
 
     'Manage bookings for the selected operating date.':
       'चयनित संचालन तारीख की बुकिंग प्रबंधित करें।',
+
+    '0 farmers waiting':
+      '0 किसान प्रतीक्षा में',
 
     'farmers waiting':
       'किसान प्रतीक्षा में',
@@ -899,14 +1032,8 @@
     'Reason':
       'कारण',
 
-    'Weighing discrepancy':
-      'वज़न में अंतर',
-
     'Quality dispute':
       'गुणवत्ता विवाद',
-
-    'Payment not confirmed':
-      'भुगतान की पुष्टि नहीं हुई',
 
     'Farmer dispute':
       'किसान विवाद',
@@ -929,9 +1056,7 @@
     'Mark complete':
       'पूर्ण चिह्नित करें',
 
-    /* =========================================================
-       STATUS MANAGEMENT
-       ========================================================= */
+    /* ---------- STATUS MANAGEMENT ---------- */
 
     'Procurement Status Management — SIH26032 Procurement Portal':
       'खरीद स्थिति प्रबंधन — SIH26032 खरीद पोर्टल',
@@ -963,12 +1088,13 @@
     'Flag issue':
       'समस्या चिह्नित करें',
 
-    /* =========================================================
-       REPORTS
-       ========================================================= */
+    /* ---------- REPORTS ---------- */
 
     'Reports and Analytics — SIH26032 Procurement Portal':
       'रिपोर्ट्स और विश्लेषण — SIH26032 खरीद पोर्टल',
+
+    'Reports and Analytics':
+      'रिपोर्ट्स और विश्लेषण',
 
     'Track bookings, waiting time, and centre performance over time.':
       'समय के साथ बुकिंग, प्रतीक्षा समय और केंद्र के प्रदर्शन को ट्रैक करें।',
@@ -989,16 +1115,28 @@
       'डेटा उपलब्ध नहीं',
 
     'Export report':
-      'रिपोर्ट एक्सपोर्ट करें',
+      'रिपोर्ट निर्यात करें',
 
     'Total bookings':
       'कुल बुकिंग',
 
+    '12 more than previous period':
+      'पिछली अवधि से 12 अधिक',
+
     'Avg waiting time':
       'औसत प्रतीक्षा समय',
 
+    '22 min':
+      '22 मिनट',
+
+    '3 min less than previous period':
+      'पिछली अवधि से 3 मिनट कम',
+
     'Completed procurements':
       'पूर्ण खरीद',
+
+    '71% of total bookings':
+      'कुल बुकिंग का 71%',
 
     'Payment pending':
       'भुगतान लंबित',
@@ -1010,10 +1148,13 @@
       'बुकिंग रुझान — घंटे के अनुसार',
 
     'Centre utilization':
-      'केंद्र उपयोग',
+      'केंद्र उपयोगिता',
 
     'Centre names are loaded from the procurement-centre directory.':
-      'केंद्र के नाम खरीद-केंद्र निर्देशिका से लोड किए जाते हैं।',
+      'केंद्रों के नाम खरीद केंद्र निर्देशिका से लोड किए जाते हैं।',
+
+    'Payment status':
+      'भुगतान स्थिति',
 
     'Paid':
       'भुगतान हो गया',
@@ -1022,20 +1163,33 @@
       'इस अवधि के लिए कोई डेटा नहीं है',
 
     'Reports will populate once bookings are recorded for the selected range.':
-      'चयनित अवधि के लिए बुकिंग दर्ज होने के बाद रिपोर्ट यहाँ दिखाई देंगी।',
+      'चयनित अवधि में बुकिंग दर्ज होने के बाद रिपोर्ट यहाँ दिखाई देगी।',
 
-    /* =========================================================
-       SETTINGS
-       ========================================================= */
+    /* ---------- SETTINGS ---------- */
 
     'Settings — SIH26032 Procurement Portal':
       'सेटिंग्स — SIH26032 खरीद पोर्टल',
+
+    'Staff':
+      'स्टाफ',
+
+    'Dashboard':
+      'डैशबोर्ड',
+
+    'Status management':
+      'स्थिति प्रबंधन',
+
+    'Reports':
+      'रिपोर्ट्स',
 
     'Language, display, notifications, and help — for this device only.':
       'भाषा, डिस्प्ले, सूचनाएँ और सहायता — केवल इस डिवाइस के लिए।',
 
     'Changes the language used across the staff portal.':
-      'स्टाफ पोर्टल में उपयोग होने वाली भाषा बदलता है।',
+      'स्टाफ पोर्टल में उपयोग होने वाली भाषा बदलें।',
+
+    'हिंदी (Hindi)':
+      'हिंदी',
 
     'Display and accessibility':
       'डिस्प्ले और सुगम्यता',
@@ -1044,7 +1198,10 @@
       'फ़ॉन्ट आकार',
 
     'Adjusts text size across this portal.':
-      'पूरे पोर्टल में टेक्स्ट का आकार बदलता है।',
+      'पूरे पोर्टल में टेक्स्ट का आकार बदलें।',
+
+    'Adjust text size across this portal.':
+      'पूरे पोर्टल में टेक्स्ट का आकार बदलें।',
 
     'High contrast':
       'उच्च कंट्रास्ट',
@@ -1061,7 +1218,7 @@
     'Notification preferences':
       'सूचना प्राथमिकताएँ',
 
-    "Slot confirmations":
+    'Slot confirmations':
       'स्लॉट पुष्टिकरण',
 
     "When a farmer's slot booking is confirmed or changed.":
@@ -1088,14 +1245,44 @@
     'Help and FAQ':
       'सहायता और FAQ',
 
+    'How do I call the next token in the queue?':
+      'मैं कतार में अगले टोकन को कैसे बुलाऊँ?',
+
+    'Go to Queue management and use the "Call next" button, or call a specific waiting token directly from its card.':
+      'कतार प्रबंधन में जाएँ और "अगला बुलाएँ" बटन का उपयोग करें, या किसी प्रतीक्षा कर रहे टोकन के कार्ड से सीधे उसे बुलाएँ।',
+
+    'What happens when I escalate a booking?':
+      'बुकिंग को एस्केलेट करने पर क्या होता है?',
+
+    'The booking moves to "Needs attention" with your selected reason and note, so a supervisor can review it before it continues.':
+      'बुकिंग आपके चुने हुए कारण और नोट के साथ "ध्यान देने की आवश्यकता" में चली जाती है, ताकि सुपरवाइज़र आगे बढ़ने से पहले उसकी समीक्षा कर सके।',
+
+    'Can I undo marking a booking as complete?':
+      'क्या मैं बुकिंग को पूर्ण चिह्नित करने की कार्रवाई वापस कर सकता हूँ?',
+
+    'Not from this screen. If a booking was completed by mistake, ask a supervisor to reopen it from the reports section.':
+      'इस स्क्रीन से नहीं। यदि कोई बुकिंग गलती से पूर्ण हो गई है, तो सुपरवाइज़र से रिपोर्ट अनुभाग से उसे दोबारा खोलने के लिए कहें।',
+
+    'Who can I contact if a counter goes offline?':
+      'यदि कोई काउंटर बंद हो जाए तो मैं किससे संपर्क करूँ?',
+
+    'Report it to your centre supervisor immediately so bookings can be redirected to the remaining active counters.':
+      'तुरंत अपने केंद्र सुपरवाइज़र को सूचित करें ताकि बुकिंग को बाकी सक्रिय काउंटरों पर भेजा जा सके।',
+
     'App information':
       'ऐप जानकारी',
 
     'Portal':
       'पोर्टल',
 
+    'SIH26032 Staff Procurement Portal':
+      'SIH26032 स्टाफ खरीद पोर्टल',
+
     'Version':
       'संस्करण',
+
+    '1.0.0 (demo)':
+      '1.0.0 (डेमो)',
 
     'Assigned centre from staff account':
       'स्टाफ खाते से निर्धारित केंद्र',
@@ -1109,21 +1296,94 @@
     'Send feedback':
       'फीडबैक भेजें',
 
-    /* =========================================================
-       COMMON BUTTONS / WORDS
-       ========================================================= */
+    /* ---------- COMMON ---------- */
 
-    'Logout':
-      'लॉग आउट',
+    'Farmer':
+      'किसान',
 
-    'Log out':
-      'लॉग आउट',
+    'Farmers':
+      'किसान',
 
-    'Submit':
-      'जमा करें',
+    'Registration':
+      'पंजीकरण',
+
+    'Register':
+      'पंजीकरण करें',
+
+    'Booking':
+      'बुकिंग',
+
+    'Staff':
+      'स्टाफ',
+
+    'Operations':
+      'संचालन',
+
+    'Analytics':
+      'विश्लेषण',
+
+    'Report':
+      'रिपोर्ट',
+
+    'Console':
+      'कंसोल',
+
+    'Procurement':
+      'खरीद',
+
+    'Token':
+      'टोकन',
+
+    'Status':
+      'स्थिति',
+
+    'Slot':
+      'स्लॉट',
+
+    'Time':
+      'समय',
+
+    'Day':
+      'दिन',
+
+    'Today':
+      'आज',
+
+    'Tomorrow':
+      'कल',
+
+    'Details':
+      'विवरण',
+
+    'Information':
+      'जानकारी',
+
+    'Search':
+      'खोजें',
+
+    'Select':
+      'चुनें',
+
+    'Select centre':
+      'केंद्र चुनें',
+
+    'Select date':
+      'तारीख चुनें',
+
+    'Select time':
+      'समय चुनें',
+
+    'Market rates':
+      'बाज़ार दरें',
+
+    'Rate':
+      'दर',
 
     'Save':
       'सहेजें',
+
+    'Submit':
+      'जमा करें',
 
     'Close':
       'बंद करें',
@@ -1209,318 +1469,203 @@
     'OK':
       'ठीक है',
 
-    'Search':
-      'खोजें',
-
     'Refresh':
       'रिफ्रेश करें',
 
-    'Loading':
-      'लोड हो रहा है...',
+    'Refresh queue':
+      'कतार रिफ्रेश करें',
 
-    'Select':
-      'चुनें',
+    'Current token':
+      'वर्तमान टोकन',
 
-    'Select an option':
-      'एक विकल्प चुनें',
+    'Your token':
+      'आपका टोकन',
 
-    'Name':
-      'नाम',
+    'Selected crop':
+      'चयनित फसल',
 
-    'Phone':
-      'फ़ोन',
+    'Selected quantity':
+      'चयनित मात्रा',
 
-    'Mobile':
-      'मोबाइल',
+    'Book now':
+      'अभी बुक करें',
 
-    'Address':
-      'पता',
+    'Search centres':
+      'केंद्र खोजें',
 
-    'Status':
-      'स्थिति',
+    'Nearest centre':
+      'निकटतम केंद्र',
 
-    'Time':
-      'समय',
+    'Centre Operator':
+      'केंद्र ऑपरेटर',
 
-    'Action':
-      'कार्रवाई',
+    'Ramesh Kumar':
+      'रमेश कुमार'
 
-    'Actions':
-      'कार्रवाइयाँ',
-
-    'Details':
-      'विवरण',
-
-    'Information':
-      'जानकारी',
-
-    'Centre details':
-      'केंद्र विवरण',
-
-    'Today':
-      'आज',
-
-    'Tomorrow':
-      'कल',
-
-    'Yesterday':
-      'कल',
-
-    'Date':
-      'तारीख',
-
-    'Time slot':
-      'समय स्लॉट',
-
-    'Booking':
-      'बुकिंग',
-
-    'Token':
-      'टोकन',
-
-    'Farmer':
-      'किसान',
-
-    'Staff':
-      'स्टाफ',
-
-    'Centre':
-      'केंद्र',
-
-    'Counter':
-      'काउंटर',
-
-    'Payment':
-      'भुगतान',
-
-    'Payments':
-      'भुगतान',
-
-    'Report':
-      'रिपोर्ट',
-
-    'Reports':
-      'रिपोर्ट्स',
-
-    'Analytics':
-      'विश्लेषण',
-
-    'Dashboard':
-      'डैशबोर्ड',
-
-    'Queue':
-      'कतार',
-
-    'Procurement':
-      'खरीद',
-
-    'Produce':
-      'उपज',
-
-    'Quantity':
-      'मात्रा',
-
-    'Village':
-      'गाँव',
-
-    'District':
-      'जिला',
-
-    'Location':
-      'लोकेशन',
-
-    'Role':
-      'भूमिका',
-
-    'Operator':
-      'ऑपरेटर',
-
-    'Supervisor':
-      'सुपरवाइज़र',
-
-    'Administrator':
-      'प्रशासक',
-
-    'Admin':
-      'एडमिन'
   };
 
 
   /* ============================================================
-     REVERSE DICTIONARY
+     BUILD REVERSE DICTIONARY
      ============================================================ */
 
   var reverse = Object.create(null);
 
-  Object.keys(DICT).forEach(function (en) {
-    var hi = DICT[en];
+  Object.keys(DICT).forEach(function (english) {
 
-    if (hi && hi !== en && !reverse[hi]) {
-      reverse[hi] = en;
+    var hindi = DICT[english];
+
+    if (
+      hindi &&
+      hindi !== english &&
+      !reverse[hindi]
+    ) {
+      reverse[hindi] = english;
     }
+
   });
 
 
   /* ============================================================
-     NORMALIZE TEXT
+     ORIGINAL TEXT STORAGE
      ============================================================ */
 
-  function norm(value) {
-    return String(value == null ? '' : value)
-      .replace(/\u00A0/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
-  }
+  var originalText =
+    new WeakMap();
+
+  var originalAttrs =
+    new WeakMap();
 
 
   /* ============================================================
-     ESCAPE REGEX
+     HELPERS
      ============================================================ */
 
+  function norm(value) {
+
+    return String(
+      value == null ? '' : value
+    )
+      .replace(/\u00A0/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+  }
+
+
   function escapeRegExp(value) {
+
     return String(value).replace(
       /[.*+?^${}()|[\]\\]/g,
       '\\$&'
     );
+
+  }
+
+
+  function preserveWhitespace(
+    original,
+    translated
+  ) {
+
+    var text =
+      String(original);
+
+    var leading =
+      text.match(/^\s*/);
+
+    var trailing =
+      text.match(/\s*$/);
+
+    return (
+      (leading ? leading[0] : '') +
+      translated +
+      (trailing ? trailing[0] : '')
+    );
+
   }
 
 
   /* ============================================================
-     TRANSLATE ONE STRING
+     PHRASE REPLACEMENT
      ============================================================ */
 
-  function direct(value, lang) {
+  function replacePhrases(
+    text,
+    phrases,
+    map
+  ) {
 
-    var original = String(value == null ? '' : value);
+    var result =
+      String(text);
 
-    var n = norm(original);
+    phrases.forEach(
+      function (phrase) {
 
-    if (!n) {
-      return original;
-    }
+        var translated =
+          map[phrase];
 
-
-    /* ----------------------------------------------------------
-       HINDI
-       ---------------------------------------------------------- */
-
-    if (lang === 'hi') {
-
-      /*
-       * First try exact translation.
-       */
-      if (DICT[n] !== undefined) {
-        return DICT[n];
-      }
-
-
-      /*
-       * Then translate phrases inside longer strings.
-       *
-       * Longest phrases are replaced first so that:
-       *
-       * "Procurement Status Management"
-       *
-       * is handled before:
-       *
-       * "Status"
-       */
-
-      var result = original;
-
-      var keys = Object.keys(DICT)
-        .filter(function (key) {
-
-          return (
-            key &&
-            key !== DICT[key] &&
-            /[A-Za-z]/.test(key)
-          );
-
-        })
-        .sort(function (a, b) {
-
-          return b.length - a.length;
-
-        });
-
-
-      keys.forEach(function (key) {
-
-        var translated = DICT[key];
-
-        if (!translated || translated === key) {
+        if (
+          !translated ||
+          translated === phrase
+        ) {
           return;
         }
 
-        var escaped = escapeRegExp(key);
+        var escaped =
+          escapeRegExp(
+            phrase
+          );
 
-        /*
-         * Case-sensitive replacement.
-         *
-         * This prevents words inside larger English words
-         * from being accidentally replaced.
-         */
+        var startsWithEnglish =
+          /^[A-Za-z0-9]/.test(
+            phrase
+          );
 
-        result = result.replace(
-          new RegExp(
-            '(?<![A-Za-z])' +
-            escaped +
-            '(?![A-Za-z])',
-            'g'
-          ),
-          translated
-        );
+        var endsWithEnglish =
+          /[A-Za-z0-9]$/.test(
+            phrase
+          );
 
-      });
+        var pattern =
+          (startsWithEnglish
+            ? '(?<![A-Za-z0-9])'
+            : '') +
+          escaped +
+          (endsWithEnglish
+            ? '(?![A-Za-z0-9])'
+            : '');
 
+        try {
 
-      /*
-       * Extra common procurement phrases.
-       */
+          result =
+            result.replace(
+              new RegExp(
+                pattern,
+                'g'
+              ),
+              translated
+            );
 
-      result = result
-        .replace(
-          /Kisan Procurement Centre/g,
-          'किसान खरीद केंद्र'
-        )
-        .replace(
-          /Procurement Centre/g,
-          'खरीद केंद्र'
-        )
-        .replace(
-          /procurement centre/g,
-          'खरीद केंद्र'
-        )
-        .replace(
-          /Procurement Center/g,
-          'खरीद केंद्र'
-        )
-        .replace(
-          /procurement center/g,
-          'खरीद केंद्र'
-        );
+        } catch (e) {}
+
+      }
+    );
+
+    return result;
+
+  }
 
 
-      return result;
-    }
-
-
-    /* ----------------------------------------------------------
-       ENGLISH
-       ---------------------------------------------------------- */
-
-    if (reverse[n] !== undefined) {
-      return reverse[n];
-    }
-
-
-    var resultEn = original;
-
-    var reverseKeys = Object.keys(reverse)
+  var englishPhrases =
+    Object.keys(DICT)
       .filter(function (key) {
 
-        return key && reverse[key];
+        return (
+          key &&
+          DICT[key] &&
+          DICT[key] !== key
+        );
 
       })
       .sort(function (a, b) {
@@ -1530,562 +1675,889 @@
       });
 
 
-    reverseKeys.forEach(function (key) {
+  var hindiPhrases =
+    Object.keys(reverse)
+      .filter(function (key) {
 
-      var english = reverse[key];
+        return key &&
+          reverse[key];
 
-      var escaped = escapeRegExp(key);
+      })
+      .sort(function (a, b) {
 
-      resultEn = resultEn.replace(
-        new RegExp(escaped, 'g'),
-        english
+        return b.length - a.length;
+
+      });
+
+
+  /* ============================================================
+     TRANSLATE STRING
+     ============================================================ */
+
+  function direct(
+    value,
+    language
+  ) {
+
+    var original =
+      String(
+        value == null
+          ? ''
+          : value
       );
 
-    });
+    var clean =
+      norm(original);
+
+    if (!clean) {
+      return original;
+    }
 
 
-    return resultEn
-      .replace(
-        /किसान खरीद केंद्र/g,
-        'Kisan Procurement Centre'
-      )
-      .replace(
-        /खरीद केंद्र/g,
-        'Procurement Centre'
+    /* ---------- HINDI ---------- */
+
+    if (language === 'hi') {
+
+      if (
+        DICT[clean] !==
+        undefined
+      ) {
+
+        return preserveWhitespace(
+          original,
+          DICT[clean]
+        );
+
+      }
+
+      return replacePhrases(
+        original,
+        englishPhrases,
+        DICT
       );
+
+    }
+
+
+    /* ---------- ENGLISH ---------- */
+
+    if (
+      reverse[clean] !==
+      undefined
+    ) {
+
+      return preserveWhitespace(
+        original,
+        reverse[clean]
+      );
+
+    }
+
+
+    return replacePhrases(
+      original,
+      hindiPhrases,
+      reverse
+    );
+
   }
 
 
   /* ============================================================
-     GET CURRENT LANGUAGE
+     REMEMBER ATTRIBUTES
+     ============================================================ */
+
+  function rememberAttributes(
+    element
+  ) {
+
+    if (
+      !element ||
+      originalAttrs.has(element)
+    ) {
+      return;
+    }
+
+    originalAttrs.set(
+      element,
+      {
+
+        placeholder:
+          element.hasAttribute(
+            'placeholder'
+          )
+            ? element.getAttribute(
+                'placeholder'
+              )
+            : null,
+
+        title:
+          element.hasAttribute(
+            'title'
+          )
+            ? element.getAttribute(
+                'title'
+              )
+            : null,
+
+        aria:
+          element.hasAttribute(
+            'aria-label'
+          )
+            ? element.getAttribute(
+                'aria-label'
+              )
+            : null,
+
+        alt:
+          element.hasAttribute(
+            'alt'
+          )
+            ? element.getAttribute(
+                'alt'
+              )
+            : null,
+
+        value:
+          (
+            element.tagName ===
+              'INPUT' ||
+            element.tagName ===
+              'TEXTAREA'
+          )
+            ? element.value
+            : null
+
+      }
+    );
+
+  }
+
+
+  /* ============================================================
+     CAPTURE ORIGINAL DOM
+     ============================================================ */
+
+  function capture(
+    root
+  ) {
+
+    if (!root) {
+      return;
+    }
+
+
+    var walker =
+      document.createTreeWalker(
+        root,
+        NodeFilter.SHOW_TEXT
+      );
+
+    var node;
+
+
+    while (
+      (node =
+        walker.nextNode())
+    ) {
+
+      var parent =
+        node.parentElement;
+
+      if (!parent) {
+        continue;
+      }
+
+      if (
+        /^(SCRIPT|STYLE|NOSCRIPT|CODE|PRE)$/i.test(
+          parent.tagName
+        )
+      ) {
+        continue;
+      }
+
+      /*
+       * Never capture the language selector.
+       */
+
+      if (
+        parent.closest &&
+        parent.closest(
+          '.kq-i18n-control'
+        )
+      ) {
+        continue;
+      }
+
+
+      if (
+        !originalText.has(node)
+      ) {
+
+        originalText.set(
+          node,
+          node.nodeValue
+        );
+
+      }
+
+    }
+
+
+    /*
+     * Capture attributes.
+     */
+
+    if (
+      root.nodeType ===
+      Node.ELEMENT_NODE
+    ) {
+
+      rememberAttributes(
+        root
+      );
+
+    }
+
+
+    var elements =
+      root.querySelectorAll
+        ? root.querySelectorAll(
+            'input,textarea,button,[title],[aria-label],[alt]'
+          )
+        : [];
+
+
+    elements.forEach(
+      rememberAttributes
+    );
+
+  }
+
+
+  /* ============================================================
+     TRANSLATE ROOT
+     ============================================================ */
+
+  function translateRoot(
+    root,
+    language
+  ) {
+
+    if (!root) {
+      return;
+    }
+
+
+    capture(root);
+
+
+    var walker =
+      document.createTreeWalker(
+        root,
+        NodeFilter.SHOW_TEXT
+      );
+
+    var node;
+
+
+    while (
+      (node =
+        walker.nextNode())
+    ) {
+
+      var parent =
+        node.parentElement;
+
+      if (!parent) {
+        continue;
+      }
+
+
+      if (
+        /^(SCRIPT|STYLE|NOSCRIPT|CODE|PRE)$/i.test(
+          parent.tagName
+        )
+      ) {
+        continue;
+      }
+
+
+      /*
+       * NEVER translate the globe control.
+       */
+
+      if (
+        parent.closest &&
+        parent.closest(
+          '.kq-i18n-control'
+        )
+      ) {
+        continue;
+      }
+
+
+      var base =
+        originalText.get(
+          node
+        );
+
+
+      if (
+        base === undefined
+      ) {
+
+        base =
+          node.nodeValue;
+
+        originalText.set(
+          node,
+          base
+        );
+
+      }
+
+
+      var translated =
+        direct(
+          base,
+          language
+        );
+
+
+      if (
+        node.nodeValue !==
+        translated
+      ) {
+
+        node.nodeValue =
+          translated;
+
+      }
+
+    }
+
+
+    /*
+     * Attributes.
+     */
+
+    var elements =
+      root.querySelectorAll
+        ? root.querySelectorAll(
+            'input,textarea,button,[title],[aria-label],[alt]'
+          )
+        : [];
+
+
+    elements.forEach(
+      function (element) {
+
+        if (
+          element.closest &&
+          element.closest(
+            '.kq-i18n-control'
+          )
+        ) {
+          return;
+        }
+
+
+        rememberAttributes(
+          element
+        );
+
+
+        var attrs =
+          originalAttrs.get(
+            element
+          );
+
+
+        if (!attrs) {
+          return;
+        }
+
+
+        if (
+          attrs.placeholder !==
+          null
+        ) {
+
+          element.placeholder =
+            direct(
+              attrs.placeholder,
+              language
+            );
+
+        }
+
+
+        if (
+          attrs.title !==
+          null
+        ) {
+
+          element.title =
+            direct(
+              attrs.title,
+              language
+            );
+
+        }
+
+
+        if (
+          attrs.aria !==
+          null
+        ) {
+
+          element.setAttribute(
+            'aria-label',
+            direct(
+              attrs.aria,
+              language
+            )
+          );
+
+        }
+
+
+        if (
+          attrs.alt !==
+          null
+        ) {
+
+          element.setAttribute(
+            'alt',
+            direct(
+              attrs.alt,
+              language
+            )
+          );
+
+        }
+
+
+        if (
+          attrs.value !==
+            null &&
+          element.tagName ===
+            'INPUT' &&
+          /^(button|submit|reset)$/i.test(
+            element.type
+          )
+        ) {
+
+          element.value =
+            direct(
+              attrs.value,
+              language
+            );
+
+        }
+
+      }
+    );
+
+  }
+
+
+  /* ============================================================
+     ADD GLOBE LANGUAGE CONTROL
+     ============================================================ */
+
+  function addLanguageControl() {
+
+    /*
+     * If an existing selector is already present,
+     * use it instead of creating a duplicate.
+     */
+
+    var existingSelect =
+      document.getElementById(
+        'languageSelect'
+      ) ||
+      document.getElementById(
+        'langSelect'
+      );
+
+
+    var oldControl =
+      document.querySelector(
+        '.kq-i18n-control'
+      );
+
+
+    if (
+      oldControl &&
+      existingSelect
+    ) {
+
+      return;
+
+    }
+
+
+    /*
+     * Remove broken/old generated control.
+     */
+
+    if (oldControl) {
+      oldControl.remove();
+    }
+
+
+    /*
+     * Create control.
+     */
+
+    var wrapper =
+      document.createElement(
+        'div'
+      );
+
+    wrapper.className =
+      'kq-i18n-control';
+
+
+    var button =
+      document.createElement(
+        'button'
+      );
+
+    button.type =
+      'button';
+
+    button.className =
+      'kq-i18n-globe';
+
+    button.innerHTML =
+      '🌐';
+
+    button.setAttribute(
+      'aria-label',
+      'Change language'
+    );
+
+    button.setAttribute(
+      'title',
+      'Change language'
+    );
+
+
+    var select =
+      document.createElement(
+        'select'
+      );
+
+    select.id =
+      'languageSelect';
+
+    select.setAttribute(
+      'aria-label',
+      'Language'
+    );
+
+
+    select.innerHTML =
+      '<option value="en">English</option>' +
+      '<option value="hi">हिन्दी</option>';
+
+
+    wrapper.appendChild(
+      button
+    );
+
+    wrapper.appendChild(
+      select
+    );
+
+
+    document.body.appendChild(
+      wrapper
+    );
+
+
+    /*
+     * Change language.
+     */
+
+    select.addEventListener(
+      'change',
+      function () {
+
+        setLanguage(
+          select.value
+        );
+
+      }
+    );
+
+
+    /*
+     * Globe opens dropdown.
+     */
+
+    button.addEventListener(
+      'click',
+      function () {
+
+        try {
+
+          if (
+            typeof select.showPicker ===
+            'function'
+          ) {
+
+            select.showPicker();
+
+          } else {
+
+            select.focus();
+
+            select.click();
+
+          }
+
+        } catch (e) {
+
+          select.focus();
+
+        }
+
+      }
+    );
+
+
+    /*
+     * Initial language.
+     */
+
+    select.value =
+      getLanguage();
+
+  }
+
+
+  /* ============================================================
+     LANGUAGE
      ============================================================ */
 
   function getLanguage() {
 
     try {
 
-      var saved = localStorage.getItem(STORAGE_KEY);
+      var saved =
+        localStorage.getItem(
+          KEY
+        );
 
-      if (saved === 'hi' || saved === 'en') {
+
+      if (
+        saved === 'hi' ||
+        saved === 'en'
+      ) {
+
         return saved;
+
       }
 
     } catch (e) {}
+
 
     return 'en';
-  }
-
-
-  /* ============================================================
-     SAVE LANGUAGE
-     ============================================================ */
-
-  function setLanguage(lang) {
-
-    lang = lang === 'hi' ? 'hi' : 'en';
-
-    try {
-
-      localStorage.setItem(
-        STORAGE_KEY,
-        lang
-      );
-
-    } catch (e) {}
-
-    document.documentElement.setAttribute(
-      'lang',
-      lang === 'hi' ? 'hi' : 'en'
-    );
-
-    document.documentElement.setAttribute(
-      'data-language',
-      lang
-    );
-
-    translatePage(lang);
-
-    updateLanguageControls(lang);
-
-    /*
-     * Tell other scripts that the language changed.
-     */
-
-    try {
-
-      window.dispatchEvent(
-        new CustomEvent(
-          'kq-language-change',
-          {
-            detail: {
-              language: lang
-            }
-          }
-        )
-      );
-
-    } catch (e) {}
-  }
-
-
-  /* ============================================================
-     TRANSLATE TEXT NODE
-     ============================================================ */
-
-  function translateTextNode(node, lang) {
-
-    if (!node || node.nodeType !== 3) {
-      return;
-    }
-
-    /*
-     * Do not modify script/style/code/pre elements.
-     */
-
-    var parent = node.parentElement;
-
-    if (!parent) {
-      return;
-    }
-
-    var tag = parent.tagName;
-
-    if (
-      tag === 'SCRIPT' ||
-      tag === 'STYLE' ||
-      tag === 'CODE' ||
-      tag === 'PRE' ||
-      tag === 'NOSCRIPT'
-    ) {
-      return;
-    }
-
-
-    var text = node.nodeValue;
-
-    if (!text || !norm(text)) {
-      return;
-    }
-
-
-    var translated = direct(
-      text,
-      lang
-    );
-
-
-    if (translated !== text) {
-      node.nodeValue = translated;
-    }
-  }
-
-
-  /* ============================================================
-     TRANSLATE ATTRIBUTES
-     ============================================================ */
-
-  function translateAttributes(element, lang) {
-
-    if (!element || element.nodeType !== 1) {
-      return;
-    }
-
-
-    /*
-     * Placeholder
-     */
-
-    if (element.hasAttribute('placeholder')) {
-
-      var placeholder =
-        element.getAttribute('placeholder');
-
-      var translatedPlaceholder =
-        direct(
-          placeholder,
-          lang
-        );
-
-      if (
-        translatedPlaceholder !==
-        placeholder
-      ) {
-
-        element.setAttribute(
-          'placeholder',
-          translatedPlaceholder
-        );
-
-      }
-    }
-
-
-    /*
-     * Title
-     */
-
-    if (element.hasAttribute('title')) {
-
-      var title =
-        element.getAttribute('title');
-
-      var translatedTitle =
-        direct(
-          title,
-          lang
-        );
-
-      if (
-        translatedTitle !== title
-      ) {
-
-        element.setAttribute(
-          'title',
-          translatedTitle
-        );
-
-      }
-    }
-
-
-    /*
-     * aria-label
-     */
-
-    if (element.hasAttribute('aria-label')) {
-
-      var aria =
-        element.getAttribute('aria-label');
-
-      var translatedAria =
-        direct(
-          aria,
-          lang
-        );
-
-      if (
-        translatedAria !== aria
-      ) {
-
-        element.setAttribute(
-          'aria-label',
-          translatedAria
-        );
-
-      }
-    }
-
-
-    /*
-     * Input buttons
-     */
-
-    if (
-      element.tagName === 'INPUT' &&
-      (
-        element.type === 'button' ||
-        element.type === 'submit' ||
-        element.type === 'reset'
-      )
-    ) {
-
-      var inputValue =
-        element.value;
-
-      var translatedValue =
-        direct(
-          inputValue,
-          lang
-        );
-
-      if (
-        translatedValue !==
-        inputValue
-      ) {
-
-        element.value =
-          translatedValue;
-
-      }
-    }
 
   }
 
 
-  /* ============================================================
-     TRANSLATE PAGE
-     ============================================================ */
+  function setLanguage(
+    language
+  ) {
 
-  function translatePage(lang) {
-
-    lang =
-      lang === 'hi'
+    language =
+      language === 'hi'
         ? 'hi'
         : 'en';
 
 
-    /*
-     * Translate normal visible text.
-     */
+    try {
 
-    var walker =
-      document.createTreeWalker(
-        document.body,
-        NodeFilter.SHOW_TEXT,
-        null,
-        false
+      localStorage.setItem(
+        KEY,
+        language
       );
 
+    } catch (e) {}
 
-    var nodes = [];
 
-    var current;
+    /*
+     * Translate the page.
+     */
 
-    while (
-      (current = walker.nextNode())
+    translateRoot(
+      document.body,
+      language
+    );
+
+
+    /*
+     * Page title.
+     */
+
+    if (
+      !window.__kqOriginalTitle
     ) {
 
-      nodes.push(current);
+      window.__kqOriginalTitle =
+        document.title;
 
     }
 
 
-    nodes.forEach(function (node) {
-
-      translateTextNode(
-        node,
-        lang
-      );
-
-    });
-
-
-    /*
-     * Translate attributes.
-     */
-
-    var elements =
-      document.querySelectorAll('*');
-
-    elements.forEach(function (element) {
-
-      translateAttributes(
-        element,
-        lang
-      );
-
-    });
-
-
-    /*
-     * Translate page title.
-     */
-
-    if (document.title) {
+    if (
+      window.__kqOriginalTitle
+    ) {
 
       document.title =
         direct(
-          document.title,
-          lang
+          window.__kqOriginalTitle,
+          language
         );
 
     }
 
 
     /*
-     * Update HTML language.
+     * HTML language.
      */
 
-    document.documentElement.setAttribute(
-      'lang',
-      lang === 'hi'
-        ? 'hi'
-        : 'en'
-    );
+    document.documentElement.lang =
+      language;
+
 
     document.documentElement.setAttribute(
       'data-language',
-      lang
+      language
     );
 
-  }
 
+    /*
+     * Keep selector synchronized.
+     */
 
-  /* ============================================================
-     LANGUAGE SELECTOR
-     ============================================================ */
-
-  function updateLanguageControls(lang) {
-
-    var selectors =
-      document.querySelectorAll(
-        '[data-language-selector], #languageSelect, #language-selector, select[name="language"]'
+    var select =
+      document.getElementById(
+        'languageSelect'
       );
 
+    if (select) {
 
-    selectors.forEach(function (select) {
+      select.value =
+        language;
 
-      if (
-        select &&
-        select.tagName === 'SELECT'
-      ) {
-
-        if (
-          select.querySelector(
-            'option[value="hi"]'
-          )
-        ) {
-
-          select.value = lang;
-
-        }
-
-      }
-
-    });
-
-
-    /*
-     * Buttons using data-lang.
-     */
-
-    var buttons =
-      document.querySelectorAll(
-        '[data-lang]'
-      );
-
-
-    buttons.forEach(function (button) {
-
-      var buttonLang =
-        button.getAttribute(
-          'data-lang'
-        );
-
-      if (
-        buttonLang === lang
-      ) {
-
-        button.classList.add(
-          'active'
-        );
-
-        button.setAttribute(
-          'aria-pressed',
-          'true'
-        );
-
-      } else {
-
-        button.classList.remove(
-          'active'
-        );
-
-        button.setAttribute(
-          'aria-pressed',
-          'false'
-        );
-
-      }
-
-    });
+    }
 
   }
 
 
   /* ============================================================
-     SELECTOR EVENTS
+     ADD CSS FOR GLOBE
      ============================================================ */
 
-  function setupLanguageControls() {
+  function addControlCSS() {
 
-    /*
-     * Select dropdown.
-     */
-
-    document.addEventListener(
-      'change',
-      function (event) {
-
-        var target =
-          event.target;
-
-        if (!target) {
-          return;
-        }
+    if (
+      document.getElementById(
+        'kq-i18n-style'
+      )
+    ) {
+      return;
+    }
 
 
-        if (
-          target.matches &&
-          target.matches(
-            '[data-language-selector], #languageSelect, #language-selector, select[name="language"]'
-          )
-        ) {
+    var style =
+      document.createElement(
+        'style'
+      );
 
-          setLanguage(
-            target.value
-          );
+    style.id =
+      'kq-i18n-style';
 
-        }
 
+    style.textContent = `
+
+      .kq-i18n-control {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        width: 52px;
+        height: 52px;
+        z-index: 999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-    );
 
-
-    /*
-     * Buttons.
-     */
-
-    document.addEventListener(
-      'click',
-      function (event) {
-
-        var target =
-          event.target;
-
-        if (!target) {
-          return;
-        }
-
-
-        var button =
-          target.closest
-            ? target.closest(
-                '[data-lang]'
-              )
-            : null;
-
-
-        if (!button) {
-          return;
-        }
-
-
-        var lang =
-          button.getAttribute(
-            'data-lang'
-          );
-
-
-        if (
-          lang === 'hi' ||
-          lang === 'en'
-        ) {
-
-          event.preventDefault();
-
-          setLanguage(lang);
-
-        }
-
+      .kq-i18n-globe {
+        width: 52px;
+        height: 52px;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 25px;
+        line-height: 1;
+        background: #ffffff;
+        box-shadow: 0 4px 16px rgba(0,0,0,.20);
+        transition: transform .15s ease;
       }
+
+      .kq-i18n-globe:hover {
+        transform: scale(1.06);
+      }
+
+      .kq-i18n-globe:active {
+        transform: scale(.96);
+      }
+
+      .kq-i18n-control select {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+        z-index: 2;
+      }
+
+      @media (max-width: 600px) {
+        .kq-i18n-control {
+          left: 14px;
+          bottom: 14px;
+        }
+
+        .kq-i18n-globe {
+          width: 48px;
+          height: 48px;
+          font-size: 23px;
+        }
+      }
+
+    `;
+
+
+    document.head.appendChild(
+      style
     );
 
   }
 
 
   /* ============================================================
-     MUTATION OBSERVER
+     DYNAMIC CONTENT OBSERVER
      ============================================================ */
 
   function setupObserver() {
@@ -2098,101 +2570,114 @@
     }
 
 
+    var timer =
+      null;
+
+
     var observer =
       new MutationObserver(
         function (mutations) {
 
-          var lang =
+          var language =
             getLanguage();
+
+
+          var roots =
+            [];
 
 
           mutations.forEach(
             function (mutation) {
 
-              /*
-               * Newly added nodes.
-               */
+              mutation.addedNodes.forEach(
+                function (node) {
 
-              if (
-                mutation.addedNodes &&
-                mutation.addedNodes.length
-              ) {
-
-                mutation.addedNodes.forEach(
-                  function (node) {
+                  if (
+                    node.nodeType ===
+                    Node.ELEMENT_NODE
+                  ) {
 
                     if (
-                      node.nodeType === 3
+                      node.classList &&
+                      node.classList.contains(
+                        'kq-i18n-control'
+                      )
                     ) {
 
-                      translateTextNode(
-                        node,
-                        lang
-                      );
+                      return;
 
                     }
 
 
-                    if (
-                      node.nodeType === 1
-                    ) {
-
-                      translateAttributes(
-                        node,
-                        lang
-                      );
-
-
-                      var walker =
-                        document.createTreeWalker(
-                          node,
-                          NodeFilter.SHOW_TEXT,
-                          null,
-                          false
-                        );
-
-
-                      var child;
-
-                      while (
-                        (child =
-                          walker.nextNode())
-                      ) {
-
-                        translateTextNode(
-                          child,
-                          lang
-                        );
-
-                      }
-
-
-                      var children =
-                        node.querySelectorAll
-                          ? node.querySelectorAll('*')
-                          : [];
-
-
-                      children.forEach(
-                        function (childElement) {
-
-                          translateAttributes(
-                            childElement,
-                            lang
-                          );
-
-                        }
-                      );
-
-                    }
+                    roots.push(
+                      node
+                    );
 
                   }
-                );
+
+                }
+              );
+
+
+              if (
+                mutation.type ===
+                'characterData'
+              ) {
+
+                if (
+                  mutation.target &&
+                  mutation.target.parentElement
+                ) {
+
+                  roots.push(
+                    mutation.target
+                      .parentElement
+                  );
+
+                }
 
               }
 
             }
           );
+
+
+          if (
+            !roots.length
+          ) {
+            return;
+          }
+
+
+          if (timer) {
+            clearTimeout(
+              timer
+            );
+          }
+
+
+          timer =
+            setTimeout(
+              function () {
+
+                roots.forEach(
+                  function (root) {
+
+                    translateRoot(
+                      root,
+                      language
+                    );
+
+                  }
+                );
+
+
+                timer =
+                  null;
+
+              },
+              20
+            );
 
         }
       );
@@ -2202,7 +2687,8 @@
       document.body,
       {
         childList: true,
-        subtree: true
+        subtree: true,
+        characterData: true
       }
     );
 
@@ -2224,7 +2710,7 @@
     translate:
       function () {
 
-        translatePage(
+        setLanguage(
           getLanguage()
         );
 
@@ -2240,28 +2726,54 @@
      INITIALIZE
      ============================================================ */
 
-  function initialize() {
+  function init() {
 
-    var lang =
-      getLanguage();
+    /*
+     * IMPORTANT:
+     * Capture the original English page BEFORE translating it.
+     */
 
-
-    document.documentElement.setAttribute(
-      'lang',
-      lang
-    );
-
-    document.documentElement.setAttribute(
-      'data-language',
-      lang
+    capture(
+      document.body
     );
 
 
-    setupLanguageControls();
+    /*
+     * Save original title.
+     */
 
-    translatePage(lang);
+    if (
+      window.__kqOriginalTitle ===
+      undefined
+    ) {
 
-    updateLanguageControls(lang);
+      window.__kqOriginalTitle =
+        document.title || '';
+
+    }
+
+
+    /*
+     * Add globe.
+     */
+
+    addControlCSS();
+
+    addLanguageControl();
+
+
+    /*
+     * Apply saved language.
+     */
+
+    setLanguage(
+      getLanguage()
+    );
+
+
+    /*
+     * Watch dynamic content.
+     */
 
     setupObserver();
 
@@ -2275,12 +2787,13 @@
 
     document.addEventListener(
       'DOMContentLoaded',
-      initialize
+      init,
+      { once: true }
     );
 
   } else {
 
-    initialize();
+    init();
 
   }
 
