@@ -39,7 +39,47 @@
     'Track bookings, waiting time, and centre performance over time.':'समय के साथ बुकिंग, प्रतीक्षा समय और केंद्र के प्रदर्शन को ट्रैक करें।','Daily':'दैनिक','Weekly':'साप्ताहिक','Monthly':'मासिक','Export report':'रिपोर्ट निर्यात करें','Total bookings':'कुल बुकिंग','Avg waiting time':'औसत प्रतीक्षा समय','Completed procurements':'पूर्ण खरीद','Payment pending':'भुगतान लंबित','Across all centres':'सभी केंद्रों में','Bookings trend — by hour':'बुकिंग ट्रेंड — घंटे के अनुसार','Centre utilization':'केंद्र उपयोगिता','Centre names are loaded from the procurement-centre directory.':'केंद्रों के नाम खरीद केंद्र निर्देशिका से लोड किए जाते हैं।','Paid':'भुगतान हो गया','No data for this period':'इस अवधि के लिए कोई डेटा नहीं','Reports will populate once bookings are recorded for the selected range.':'चयनित अवधि में बुकिंग दर्ज होने के बाद रिपोर्ट यहाँ दिखाई देगी।','12 more than previous period':'पिछली अवधि से 12 अधिक','3 min less than previous period':'पिछली अवधि से 3 मिनट कम','71% of total bookings':'कुल बुकिंग का 71%',
     'Language, display, notifications, and help — for this device only.':'भाषा, डिस्प्ले, सूचनाएँ और सहायता — केवल इस डिवाइस के लिए।','Language':'भाषा','Display language':'डिस्प्ले भाषा','Changes the language used across the staff portal.':'स्टाफ पोर्टल में उपयोग होने वाली भाषा बदलें।','हिंदी (Hindi)':'हिंदी','Display and accessibility':'डिस्प्ले और सुगम्यता','Font size':'फ़ॉन्ट आकार','Adjust text size across this portal.':'पूरे पोर्टल में टेक्स्ट का आकार बदलें।','High contrast':'उच्च कंट्रास्ट','Increases color contrast for better visibility.':'बेहतर दृश्यता के लिए रंग कंट्रास्ट बढ़ाता है।','Reduced motion':'कम गति','Turns off animations and transitions.':'एनिमेशन और ट्रांज़िशन बंद करता है।','Notification preferences':'सूचना प्राथमिकताएँ','Slot confirmations':'स्लॉट पुष्टिकरण','When a farmer\'s slot booking is confirmed or changed.':'किसान की स्लॉट बुकिंग की पुष्टि या बदलाव होने पर।','Queue status changes':'कतार स्थिति बदलाव','When tokens are called, held, or escalated.':'टोकन बुलाए, होल्ड या एस्केलेट होने पर।','Payment updates':'भुगतान अपडेट','When a payment is completed or still pending.':'भुगतान पूरा होने या लंबित रहने पर।','Centre announcements':'केंद्र घोषणाएँ','Closures, delays, and weather-related advisories.':'बंद रहने, देरी और मौसम संबंधी सलाह।','Help and FAQ':'सहायता और FAQ','App information':'ऐप जानकारी','Portal':'पोर्टल','Version':'संस्करण','Assigned centre from staff account':'स्टाफ खाते से निर्धारित केंद्र','Data mode':'डेटा मोड','Connected staff portal':'कनेक्टेड स्टाफ पोर्टल','Send feedback':'फीडबैक भेजें',
     'Wheat':'गेहूँ','Maize':'मक्का','Mustard':'सरसों','Paddy':'धान','Kisan Procurement Centre':'किसान खरीद केंद्र','procurement centre':'खरीद केंद्र','Procurement Centre':'खरीद केंद्र','Centre Operator':'केंद्र ऑपरेटर','Ramesh Kumar':'रमेश कुमार','Suresh Yadav':'सुरेश यादव','Kheri Village':'खेड़ी गाँव',
-    'My dashboard':'मेरा डैशबोर्ड','Farmer dashboard':'किसान डैशबोर्ड','Search centres':'केंद्र खोजें','Nearest centre':'निकटतम केंद्र','Selected crop':'चयनित फसल','Selected quantity':'चयनित मात्रा','Book now':'अभी बुक करें','Available':'उपलब्ध','Full':'भरा हुआ','Closed':'बंद','Open':'खुला','Refresh':'रिफ्रेश करें','Refresh queue':'कतार रिफ्रेश करें','Current token':'वर्तमान टोकन','Your token':'आपका टोकन','Waiting':'प्रतीक्षा में','Called':'बुलाया गया','Serving':'सेवा में','Completed':'पूर्ण','Cancelled':'रद्द','Held':'होल्ड','Skipped':'छोड़ा गया','Recall':'फिर से बुलाएँ','Resume':'फिर शुरू करें','Hold':'होल्ड','Complete':'पूर्ण करें','Skip':'छोड़ें','Serve':'सेवा शुरू करें','Call':'बुलाएँ','Logout':'लॉग आउट','Login':'लॉगिन','Submit':'जमा करें','Save':'सहेजें','Close':'बंद करें','Next':'अगला','Previous':'पिछला','Required':'आवश्यक','Optional':'वैकल्पिक','Success':'सफल','Error':'त्रुटि'
+    'My dashboard':'मेरा डैशबोर्ड','Farmer dashboard':'किसान डैशबोर्ड','Search centres':'केंद्र खोजें','Nearest centre':'निकटतम केंद्र','Selected crop':'चयनित फसल','Selected quantity':'चयनित मात्रा','Book now':'अभी बुक करें','Available':'उपलब्ध','Full':'भरा हुआ','Closed':'बंद','Open':'खुला','Refresh':'रिफ्रेश करें','Refresh queue':'कतार रिफ्रेश करें','Current token':'वर्तमान टोकन','Your token':'आपका टोकन','Waiting':'प्रतीक्षा में','Called':'बुलाया गया','Serving':'सेवा में','Completed':'पूर्ण','Cancelled':'रद्द','Held':'होल्ड','Skipped':'छोड़ा गया','Recall':'फिर से बुलाएँ','Resume':'फिर शुरू करें','Hold':'होल्ड','Complete':'पूर्ण करें','Skip':'छोड़ें','Serve':'सेवा शुरू करें','Call':'बुलाएँ','Logout':'लॉग आउट','Login':'लॉगिन','Submit':'जमा करें','Save':'सहेजें','Close':'बंद करें','Next':'अगला','Previous':'पिछला','Required':'आवश्यक','Optional':'वैकल्पिक','Success':'सफल','Error':'त्रुटि',
+
+    /* Added: fill gaps found across page01-page16 so the whole app switches, not just parts of it. */
+    '0 farmers waiting':'0 किसान प्रतीक्षा में','1.0.0 (demo)':'1.0.0 (डेमो)','10-digit mobile number':'10 अंकों का मोबाइल नंबर','22 min':'22 मिनट',
+    'ALERT':'अलर्ट','Add any detail for the supervisor':'पर्यवेक्षक के लिए कोई भी विवरण जोड़ें','Adjusts text size across this portal.':'इस पोर्टल में टेक्स्ट का आकार समायोजित करता है।','Admin':'व्यवस्थापक',
+    'Alerts — Farmer Queue':'अलर्ट — फार्मर क्यू','At least 8 characters':'कम से कम 8 अक्षर','Awaiting quality check':'गुणवत्ता जाँच की प्रतीक्षा में','Book a Slot — Procurement Portal':'स्लॉट बुक करें — खरीद पोर्टल',
+    'Bookings are being redirected to Counters 1 and 2 — expect slightly longer waits today.':'बुकिंग काउंटर 1 और 2 पर भेजी जा रही हैं — आज थोड़ी अधिक प्रतीक्षा हो सकती है।','Can I undo marking a booking as complete?':'क्या बुकिंग को पूर्ण चिह्नित करने के बाद पूर्ववत किया जा सकता है?','Cancel booking':'बुकिंग रद्द करें',
+    'Centre-specific closure notices will appear here when published by staff.':'स्टाफ द्वारा प्रकाशित होने पर केंद्र-विशिष्ट बंद होने की सूचनाएँ यहाँ दिखाई देंगी।','Centres now use a faster two-step quality check — average wait times should improve.':'केंद्र अब तेज़ दो-चरणीय गुणवत्ता जाँच का उपयोग कर रहे हैं — औसत प्रतीक्षा समय बेहतर होना चाहिए।',
+    'Check indicative crop prices before planning your visit.':'अपनी यात्रा की योजना बनाने से पहले संकेतात्मक फसल मूल्य देख लें।','Check your internet connection and try again.':'अपना इंटरनेट कनेक्शन जाँचें और फिर प्रयास करें।','Choose manually':'मैन्युअल रूप से चुनें','Clear filters':'फ़िल्टर साफ़ करें',
+    'Copy':'कॉपी करें','Couldn\'t load your status':'आपकी स्थिति लोड नहीं हो सकी','Download':'डाउनलोड करें','Enter district':'जिला दर्ज करें','Enter password':'पासवर्ड दर्ज करें','Enter village':'गाँव दर्ज करें',
+    'Enter your full name':'अपना पूरा नाम दर्ज करें','Enter your password':'अपना पासवर्ड दर्ज करें','Enter your staff ID':'अपनी स्टाफ आईडी दर्ज करें','Farmer Login - Kisan Queue Farmer Queue':'किसान लॉगिन - Kisan Queue फार्मर क्यू',
+    'Farmer Queue home':'फार्मर क्यू होम','Find a Centre — Farmer Queue':'केंद्र खोजें — फार्मर क्यू','Find a centre':'केंद्र खोजें',
+    'Go to Queue management and use the "Call next" button, or call a specific waiting token directly from its card.':'"कतार प्रबंधन" पर जाएँ और "अगला बुलाएँ" बटन का उपयोग करें, या किसी प्रतीक्षारत टोकन को उसके कार्ड से सीधे बुलाएँ।',
+    'Has data':'डेटा उपलब्ध है','How do I call the next token in the queue?':'मैं कतार में अगला टोकन कैसे बुलाऊँ?','Incorrect staff ID or password':'गलत स्टाफ आईडी या पासवर्ड',
+    'Kavita Devi — Token #A227':'कविता देवी — टोकन #A227','Live Queue — Farmer Queue':'लाइव कतार — फार्मर क्यू','Location not available':'लोकेशन उपलब्ध नहीं',
+    'Log in with your mobile number and password to book a slot, see your token and check the queue.':'स्लॉट बुक करने, अपना टोकन देखने और कतार जाँचने के लिए अपने मोबाइल नंबर और पासवर्ड से लॉगिन करें।','MANDI MARKET':'मंडी बाज़ार',
+    'Manage bookings for the selected operating date.':'चयनित परिचालन तिथि के लिए बुकिंग प्रबंधित करें।','Manages all centres':'सभी केंद्रों का प्रबंधन करता है','Manoj Singh — Token #A231':'मनोज सिंह — टोकन #A231',
+    'My Dashboard — SIH26032 Procurement Portal':'मेरा डैशबोर्ड — SIH26032 खरीद पोर्टल','My Procurement Status — Procurement Portal':'मेरी खरीद स्थिति — खरीद पोर्टल','My Profile - Kisan Queue Farmer Queue':'मेरी प्रोफ़ाइल - Kisan Queue फार्मर क्यू',
+    'Need farmer access instead? That\'s a separate portal —':'किसान के रूप में लॉगिन करना है? वह एक अलग पोर्टल है —','No centre-specific alert is currently published.':'फ़िलहाल कोई केंद्र-विशिष्ट अलर्ट प्रकाशित नहीं है।','No centres found':'कोई केंद्र नहीं मिला','No-data state':'डेटा-रहित स्थिति',
+    'Not from this screen. If a booking was completed by mistake, ask a supervisor to reopen it from the reports section.':'इस स्क्रीन से नहीं। यदि किसी बुकिंग को गलती से पूर्ण चिह्नित कर दिया गया है, तो पर्यवेक्षक से रिपोर्ट सेक्शन से इसे फिर से खोलने के लिए कहें।',
+    'Notifications — Farmer Queue':'सूचनाएँ — फार्मर क्यू','Operations Dashboard — SIH26032 Procurement Portal':'संचालन डैशबोर्ड — SIH26032 खरीद पोर्टल','Operator':'ऑपरेटर','Optional farmer ID':'वैकल्पिक किसान आईडी','Oversees one centre':'एक केंद्र की देखरेख करता है',
+    'Prices shown are indicative/demo values for the prototype. Connect an official mandi-price source before presenting them as live market prices.':'दिखाई गई कीमतें प्रोटोटाइप के लिए संकेतात्मक/डेमो मान हैं। इन्हें लाइव बाज़ार मूल्य के रूप में दिखाने से पहले किसी आधिकारिक मंडी-मूल्य स्रोत से जोड़ें।',
+    'Procurement Portal — Book Your Slot':'खरीद पोर्टल — अपना स्लॉट बुक करें','Procurement Status Management — SIH26032 Procurement Portal':'खरीद स्थिति प्रबंधन — SIH26032 खरीद पोर्टल','Profile completion':'प्रोफ़ाइल पूर्णता',
+    'Queue Management — SIH26032 Procurement Portal':'कतार प्रबंधन — SIH26032 खरीद पोर्टल','Queue date':'कतार तिथि','Redirecting to your dashboard…':'आपके डैशबोर्ड पर रीडायरेक्ट किया जा रहा है…',
+    'Register your farmer details to access procurement centre services.':'खरीद केंद्र सेवाओं का उपयोग करने के लिए अपना किसान विवरण पंजीकृत करें।','Report it to your centre supervisor immediately so bookings can be redirected to the remaining active counters.':'तुरंत अपने केंद्र पर्यवेक्षक को सूचित करें ताकि बुकिंग को शेष सक्रिय काउंटरों पर भेजा जा सके।',
+    'Reports and Analytics — SIH26032 Procurement Portal':'रिपोर्ट और विश्लेषण — SIH26032 खरीद पोर्टल','Run the centre floor from one screen.':'एक ही स्क्रीन से केंद्र का पूरा कामकाज चलाएँ।','Runs day-to-day queue':'दैनिक कतार का संचालन करता है',
+    'SIH26032 Staff Procurement Portal':'SIH26032 स्टाफ खरीद पोर्टल','STAFF LOGIN PORTAL':'स्टाफ लॉगिन पोर्टल',
+    'Sample announcements — centre alerts are not connected to a live data source yet. Your own booking and token updates are on the Notifications page.':'नमूना घोषणाएँ — केंद्र अलर्ट अभी लाइव डेटा स्रोत से जुड़े नहीं हैं। आपकी अपनी बुकिंग और टोकन अपडेट सूचनाएँ पेज पर हैं।',
+    'Search by centre name or district':'केंद्र नाम या जिले से खोजें','Search centres by name or district':'नाम या जिले से केंद्र खोजें','Search village, district, or centre name':'गाँव, जिला या केंद्र नाम खोजें',
+    'Search your nearest procurement centre — village, district or centre name':'अपना निकटतम खरीद केंद्र खोजें — गाँव, जिला या केंद्र का नाम','Select a role to continue':'जारी रखने के लिए एक भूमिका चुनें',
+    'Select your role and enter your staff credentials. Your assigned procurement centre is loaded from your staff account.':'अपनी भूमिका चुनें और अपने स्टाफ क्रेडेंशियल दर्ज करें। आपका निर्धारित खरीद केंद्र आपके स्टाफ खाते से लोड होता है।',
+    'Settings — SIH26032 Procurement Portal':'सेटिंग्स — SIH26032 खरीद पोर्टल','Share':'शेयर करें','Sign In':'साइन इन करें',
+    'Sign in to manage today\'s queue, update procurement status, and track centre performance. This login page is for centre staff only — for farmer login use the public app.':'आज की कतार प्रबंधित करने, खरीद स्थिति अपडेट करने और केंद्र के प्रदर्शन को ट्रैक करने के लिए साइन इन करें। यह लॉगिन पेज केवल केंद्र स्टाफ के लिए है — किसान लॉगिन के लिए सार्वजनिक ऐप का उपयोग करें।',
+    'Signed in':'साइन इन हो गया','Simulate a session-expired redirect →':'सत्र-समाप्ति रीडायरेक्ट का अनुकरण करें →','Staff':'स्टाफ','Staff ID':'स्टाफ आईडी','Staff Login — SIH26032 Procurement Portal':'स्टाफ लॉगिन — SIH26032 खरीद पोर्टल',
+    'Staff accounts are created by an administrator. No passwords are stored in this page.':'स्टाफ खाते व्यवस्थापक द्वारा बनाए जाते हैं। इस पेज पर कोई पासवर्ड संग्रहीत नहीं होता।','Supervisor':'पर्यवेक्षक','Suresh Yadav — Token #A214':'सुरेश यादव — टोकन #A214',
+    'The booking moves to "Needs attention" with your selected reason and note, so a supervisor can review it before it continues.':'बुकिंग आपके चुने गए कारण और नोट के साथ "ध्यान आवश्यक" में चली जाती है, ताकि आगे बढ़ने से पहले कोई पर्यवेक्षक इसकी समीक्षा कर सके।',
+    'Today\'s Market Prices':'आज के बाज़ार मूल्य','Tokens ahead of you':'आपसे आगे टोकन','Try a different village, district, or clear your filters.':'कोई अलग गाँव, जिला आज़माएँ, या अपने फ़िल्टर साफ़ करें।',
+    'Turn on location access in your browser settings, or search by village or district instead.':'अपने ब्राउज़र सेटिंग में लोकेशन एक्सेस चालू करें, या इसके बजाय गाँव या जिले से खोजें।','Type the password again':'पासवर्ड दोबारा टाइप करें','Updated today':'आज अपडेट किया गया','View token':'टोकन देखें',
+    'What happens when I escalate a booking?':'जब कोई बुकिंग एस्केलेट की जाती है तो क्या होता है?','Who can I contact if a counter goes offline?':'यदि कोई काउंटर बंद हो जाए तो किससे संपर्क करें?','Your Token — Procurement Portal':'आपका टोकन — खरीद पोर्टल',
+    'Your procurement centres are running normally.':'आपके खरीद केंद्र सामान्य रूप से चल रहे हैं।','Your session expired. Sign in again to continue.':'आपका सत्र समाप्त हो गया। जारी रखने के लिए फिर से साइन इन करें।','e.g. 25':'उदा. 25','e.g. OP001':'उदा. OP001','per quintal':'प्रति क्विंटल',
+    '🌱 Gram':'🌱 चना','🌼 Mustard':'🌼 सरसों','🌽 Maize':'🌽 मक्का','🌾 Paddy':'🌾 धान','🌾 Wheat':'🌾 गेहूँ','🍚 Rice':'🍚 चावल','📍 Use my location':'📍 मेरी लोकेशन का उपयोग करें','🫘 Lentil':'🫘 दाल'
   };
 
   var reverse = Object.create(null);
@@ -55,6 +95,12 @@
   var originalAttrs = new WeakMap();
   var knownNodes = new WeakSet();
   var scheduled = false;
+  /*
+   * document.title lives in <head>, outside document.body, so the
+   * walker never sees it. Track its canonical English value
+   * separately and translate it whenever the language changes.
+   */
+  var originalTitle = null;
 
   function norm(s) {
     return String(s == null ? '' : s)
@@ -260,6 +306,13 @@
       lang
     );
 
+    if (originalTitle !== null) {
+      document.title =
+        lang === 'hi'
+          ? direct(originalTitle, 'hi')
+          : originalTitle;
+    }
+
     document.documentElement.lang = lang;
 
     document
@@ -287,15 +340,26 @@
       document.getElementById('langSelect');
 
     /*
-     * If a language selector already exists on the page,
-     * don't create another one.
+     * If a language selector already exists on the page
+     * (several pages render their own <select id="languageSelect">
+     * or <select id="langSelect"> instead of using the floating
+     * globe control), don't create a second one — but DO make sure
+     * it actually drives the shared translation engine. Without this,
+     * some pages only ran their own small, hand-written translation
+     * snippet on 'change' (covering a handful of strings) and never
+     * called the shared apply()/translateRoot(), so most of the page
+     * — and the saved language preference — never updated.
      */
     if (sel) {
-      var existingWrap =
-        sel.closest('.kq-i18n-control');
+      if (!sel.dataset.kqBound) {
+        sel.dataset.kqBound = '1';
 
-      if (existingWrap) {
-        return;
+        sel.addEventListener(
+          'change',
+          function () {
+            apply(sel.value);
+          }
+        );
       }
 
       return;
@@ -350,6 +414,8 @@
       document.body,
       'en'
     );
+
+    originalTitle = document.title;
 
     attachControl();
 
