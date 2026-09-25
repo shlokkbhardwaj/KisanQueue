@@ -439,6 +439,34 @@
 
 <link rel="stylesheet" href="hindi-i18n.css">
   <script src="hindi-i18n.js"></script>
+
+<style id="kq-shared-navigation-fix">
+:root{--kq-green:#073b2a;--kq-green2:#0b6b45;--kq-gold:#f3c34f}
+body.kq-enhanced .topbar{padding-left:82px!important;position:relative!important;z-index:1000!important}
+body.kq-enhanced .topbar .logo{display:flex!important;align-items:center!important;min-width:0!important}
+body.kq-enhanced .topbar .logo .kq-page-brand{display:inline-flex!important;align-items:center!important;text-decoration:none!important}
+body.kq-enhanced .topbar .logo .kq-page-brand img{display:block!important;width:178px!important;max-width:42vw!important;height:auto!important;padding:7px 12px!important;box-sizing:border-box!important;background:linear-gradient(135deg,#063d2b,#0b6b45)!important;border:1px solid rgba(243,195,79,.82)!important;border-radius:13px!important;box-shadow:0 0 0 2px rgba(243,195,79,.12),0 7px 24px rgba(7,59,42,.25)!important}
+.kq-menu-btn{position:fixed!important;z-index:10002!important;top:18px!important;left:18px!important;width:46px!important;height:46px!important;border:1px solid rgba(243,195,79,.8)!important;border-radius:13px!important;background:linear-gradient(145deg,#0b6b45,#073b2a)!important;color:#fff!important;box-shadow:0 8px 24px rgba(7,59,42,.28),0 0 0 3px rgba(243,195,79,.10)!important;cursor:pointer!important;display:inline-flex!important;align-items:center!important;justify-content:center!important}
+.kq-menu-btn.is-open{background:linear-gradient(145deg,#d79f24,#f3c34f)!important;color:#073b2a!important}
+.kq-menu-icon{width:19px;height:15px;position:relative;display:block}
+.kq-menu-icon span{position:absolute;left:0;width:19px;height:2.5px;border-radius:2px;background:currentColor;transition:.2s}
+.kq-menu-icon span:nth-child(1){top:0}.kq-menu-icon span:nth-child(2){top:6px}.kq-menu-icon span:nth-child(3){top:12px}
+.kq-menu-btn.is-open .kq-menu-icon span:nth-child(1){top:6px;transform:rotate(45deg)}
+.kq-menu-btn.is-open .kq-menu-icon span:nth-child(2){opacity:0}
+.kq-menu-btn.is-open .kq-menu-icon span:nth-child(3){top:6px;transform:rotate(-45deg)}
+.kq-drawer-backdrop{position:fixed!important;inset:0!important;z-index:10000!important;background:rgba(2,24,16,.48)!important;opacity:0;pointer-events:none;transition:opacity .2s ease;backdrop-filter:blur(2px)}
+.kq-drawer-backdrop.is-open{opacity:1;pointer-events:auto}
+.kq-drawer{position:fixed!important;top:0!important;left:0!important;bottom:0!important;z-index:10001!important;width:min(330px,88vw)!important;background:linear-gradient(180deg,#063b2a 0%,#07533a 46%,#063426 100%)!important;color:#fff!important;border-right:1px solid rgba(243,195,79,.34)!important;box-shadow:18px 0 50px rgba(0,0,0,.25)!important;transform:translateX(-102%);transition:transform .24s cubic-bezier(.22,.8,.25,1);display:flex;flex-direction:column}
+.kq-drawer.is-open{transform:translateX(0)}
+.kq-drawer-head{padding:20px 18px 18px!important;border-bottom:1px solid rgba(255,255,255,.13)!important;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(243,195,79,.05))!important}
+.kq-drawer-head .kq-brand-wrap{display:block!important;text-decoration:none!important}
+.kq-drawer-head .kq-brand-logo{display:block!important;width:200px!important;max-width:100%!important;height:auto!important;margin:0 auto!important;padding:7px 12px!important;box-sizing:border-box!important;background:linear-gradient(135deg,#063d2b,#0b6b45)!important;border:1px solid rgba(243,195,79,.82)!important;border-radius:13px!important}
+.kq-nav-scroll{overflow:auto!important;padding:15px 12px 18px!important}.kq-nav-group{margin-bottom:14px!important}.kq-nav-label{color:rgba(255,255,255,.52)!important;padding:9px 10px 7px!important;font-size:10.5px!important;font-weight:700!important;letter-spacing:.12em!important;text-transform:uppercase!important}
+.kq-nav-link{display:flex!important;align-items:center!important;width:100%!important;box-sizing:border-box!important;color:rgba(255,255,255,.88)!important;text-decoration:none!important;border:1px solid transparent!important;border-radius:11px!important;margin:4px 0!important;padding:10px!important;font-size:13px!important;font-weight:500!important;transition:all .18s ease!important}
+.kq-nav-link:hover{background:rgba(255,255,255,.09)!important;border-color:rgba(255,255,255,.09)!important;color:#fff!important;transform:translateX(4px)!important}.kq-nav-link.active{background:linear-gradient(90deg,rgba(243,195,79,.23),rgba(243,195,79,.08))!important;color:#fff!important;font-weight:700!important}
+@media(max-width:720px){body.kq-enhanced .topbar{padding-left:68px!important;padding-right:14px!important}.kq-menu-btn{top:10px!important;left:10px!important;width:40px!important;height:40px!important}.body.kq-enhanced .topbar .logo .kq-page-brand img,.kq-page-brand img{width:140px!important}.kq-drawer-head .kq-brand-logo{width:150px!important}}
+</style>
+
 </head>
 
 
@@ -2509,6 +2537,55 @@ if (KQ.isLoggedIn()) {
 
 </script>
 
+
+
+<script id="kq-shared-navigation-fix-js">
+(function(){
+  'use strict';
+  const pages=[
+    {label:'Landing / Home',file:'page01-landing.html',group:'Farmer portal'},
+    {label:'Farmer registration',file:'page02-farmer-registration.html',group:'Farmer portal'},
+    {label:'Slot booking',file:'page03-slot-booking.html',group:'Farmer portal'},
+    {label:'Booking token',file:'page04-booking-token.html',group:'Farmer portal'},
+    {label:'Procurement status',file:'page05-procurement-status.html',group:'Farmer portal'},
+    {label:'Farmer dashboard',file:'page06-farmer-dashboard.html',group:'Farmer portal'},
+    {label:'Centre finder',file:'page07-centre-finder.html',group:'Farmer portal'},
+    {label:'Live queue',file:'page08-live-queue.html',group:'Farmer portal'},
+    {label:'Notifications',file:'page09-notifications.html',group:'Farmer portal'},
+    {label:'Alerts',file:'page10-alerts.html',group:'Farmer portal'},
+    {label:'Staff login',file:'page11-staff-login.html',group:'Operations & staff'},
+    {label:'Operations dashboard',file:'page12-operations-dashboard.html',group:'Operations & staff'},
+    {label:'Queue console',file:'page13-queue-console.html',group:'Operations & staff'},
+    {label:'Status management',file:'page14-status-management.html',group:'Operations & staff'},
+    {label:'Reports & analytics',file:'page15-reports-analytics.html',group:'Operations & staff'},
+    {label:'Settings',file:'page16-settings.html',group:'Operations & staff'}
+  ];
+  const currentFile=location.pathname.split(/[\\/]/).pop()||'page02-farmer-registration.html';
+  const logo=(cls='')=>'<a class="kq-brand-wrap '+cls+'" href="page01-landing.html" aria-label="Kisan Queue home"><img class="kq-brand-logo" src="farmer-queue.png" alt="Kisan Queue"></a>';
+  function init(){
+    document.body.classList.add('kq-enhanced');
+    const oldLogo=document.querySelector('.topbar .logo');
+    if(oldLogo) oldLogo.innerHTML=logo('kq-page-brand');
+    if(document.querySelector('.kq-menu-btn')) return;
+    const menu=document.createElement('button');
+    menu.className='kq-menu-btn';menu.type='button';menu.setAttribute('aria-label','Open navigation menu');menu.setAttribute('aria-expanded','false');
+    menu.innerHTML='<span class="kq-menu-icon"><span></span><span></span><span></span></span>';
+    document.body.appendChild(menu);
+    const backdrop=document.createElement('div');backdrop.className='kq-drawer-backdrop';document.body.appendChild(backdrop);
+    const drawer=document.createElement('aside');drawer.className='kq-drawer';drawer.setAttribute('aria-label','Main navigation');
+    let nav='';
+    ['Farmer portal','Operations & staff'].forEach(group=>{nav+='<section class="kq-nav-group"><div class="kq-nav-label">'+group+'</div>';pages.filter(p=>p.group===group).forEach(p=>{const active=p.file===currentFile;nav+='<a class="kq-nav-link'+(active?' active':'')+'" href="'+p.file+'"'+(active?' aria-current="page"':'')+'><span>'+p.label+'</span></a>';});nav+='</section>';});
+    drawer.innerHTML='<div class="kq-drawer-head">'+logo()+'</div><div class="kq-nav-scroll">'+nav+'</div>';
+    document.body.appendChild(drawer);
+    const setOpen=open=>{drawer.classList.toggle('is-open',open);backdrop.classList.toggle('is-open',open);menu.classList.toggle('is-open',open);menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu');};
+    menu.addEventListener('click',()=>setOpen(!drawer.classList.contains('is-open')));
+    backdrop.addEventListener('click',()=>setOpen(false));
+    drawer.addEventListener('click',e=>{if(e.target.closest('a'))setOpen(false);});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false);});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
 
 </body>
 
