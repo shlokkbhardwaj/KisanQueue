@@ -753,6 +753,27 @@ body.kq-enhanced .topbar .logo .kq-brand-logo {
                         type="text"
                         id="district"
                         placeholder="Enter district"
+                        autocomplete="address-level2"
+                    >
+
+                </div>
+
+
+
+                <!-- STATE -->
+
+                <div class="form-group">
+
+                    <label for="state">
+                        State
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="state"
+                        placeholder="Enter state"
+                        autocomplete="address-level1"
                     >
 
                 </div>
@@ -1033,7 +1054,7 @@ body.kq-enhanced .topbar .logo .kq-brand-logo {
             <div class="summary-item">
 
                 <div class="summary-label">
-                    Village / District
+                    Village / District / State
                 </div>
 
                 <div
@@ -1265,6 +1286,11 @@ function updateProgress() {
 
         document
             .getElementById('district')
+            .value
+            .trim(),
+
+        document
+            .getElementById('state')
             .value
             .trim(),
 
@@ -2065,6 +2091,13 @@ form.addEventListener(
                 .trim();
 
 
+        const state =
+            document
+                .getElementById('state')
+                .value
+                .trim();
+
+
         const farmerId =
             document
                 .getElementById('farmerId')
@@ -2113,7 +2146,7 @@ form.addEventListener(
                 district || null,
 
             state:
-                'Bihar',
+                state || null,
 
             preferred_language:
                 document
@@ -2260,7 +2293,8 @@ form.addEventListener(
                 .textContent =
                 [
                     farmer.village,
-                    farmer.district
+                    farmer.district,
+                    farmer.state
                 ]
                     .filter(Boolean)
                     .join(', ') || '—';
