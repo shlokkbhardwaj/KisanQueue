@@ -6,23 +6,7 @@
     gap: 6px;
     z-index: 1000;
 }
-
-/* Keep controls aligned inside the header */
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-/* Login/standalone pages without a header */
-body > .language-switcher,
-.login-page .language-switcher {
-    position: fixed;
-    top: 12px;
-    right: 16px;
-    z-index: 9999;
-}
-/* ===== Compact Language Button ===== */
+/* ===== LANGUAGE ICON ONLY ===== */
 
 .kq-i18n-control {
     position: fixed !important;
@@ -31,46 +15,73 @@ body > .language-switcher,
     top: auto !important;
     right: auto !important;
 
-    width: 44px !important;
-    height: 44px !important;
+    width: 46px !important;
+    height: 46px !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
 
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
 
-    background: #ffffff !important;
-    border: 1px solid #d8d8d8 !important;
+    background: white !important;
+    border: 1px solid #ddd !important;
     border-radius: 50% !important;
 
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18) !important;
+    box-shadow: 0 3px 12px rgba(0,0,0,.18) !important;
 
+    overflow: hidden !important;
     z-index: 99999 !important;
-
-    cursor: pointer;
 }
 
-/* Hide the select itself */
+/* Hide ALL visible text from the select */
 .kq-i18n-control select {
     position: absolute !important;
-    width: 44px !important;
-    height: 44px !important;
+
+    left: 0 !important;
+    top: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
 
     opacity: 0 !important;
+
+    appearance: none !important;
+    -webkit-appearance: none !important;
+
+    border: none !important;
+    outline: none !important;
+
     cursor: pointer !important;
 }
 
-/* Globe icon */
+/* Show ONLY the globe */
 .kq-i18n-control::before {
-    content: "🌐";
-    font-size: 22px;
-    line-height: 1;
-    pointer-events: none;
+    content: "🌐" !important;
+
+    position: absolute !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    font-size: 22px !important;
+    line-height: 1 !important;
+
+    width: auto !important;
+    height: auto !important;
+
+    pointer-events: none !important;
 }
 
-/* Remove old positioning */
-body > .kq-i18n-control {
-    top: auto !important;
-    right: auto !important;
-    left: 18px !important;
-    bottom: 18px !important;
+/* Prevent old language text/labels from appearing */
+.kq-i18n-control label,
+.kq-i18n-control span,
+.kq-i18n-control option {
+    display: none !important;
 }
