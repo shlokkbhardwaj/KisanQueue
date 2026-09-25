@@ -467,6 +467,78 @@ body.kq-enhanced .topbar .logo .kq-page-brand img{display:block!important;width:
 @media(max-width:720px){body.kq-enhanced .topbar{padding-left:68px!important;padding-right:14px!important}.kq-menu-btn{top:10px!important;left:10px!important;width:40px!important;height:40px!important}.body.kq-enhanced .topbar .logo .kq-page-brand img,.kq-page-brand img{width:140px!important}.kq-drawer-head .kq-brand-logo{width:150px!important}}
 </style>
 
+
+<style id="kq-landing-logo-and-login-polish">
+/* Match the logo appearance used on the first landing page. */
+body.kq-enhanced .topbar .logo .kq-page-brand img,
+body.kq-enhanced .topbar .logo .kq-brand-logo {
+    display:block !important;
+    width:178px !important;
+    max-width:min(178px,42vw) !important;
+    height:auto !important;
+    padding:0 !important;
+    box-sizing:border-box !important;
+    background:transparent !important;
+    border:0 !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+    filter:none !important;
+}
+
+/* Keep the same clean logo treatment inside the sidebar. */
+.kq-drawer-head .kq-brand-logo {
+    display:block !important;
+    width:200px !important;
+    max-width:100% !important;
+    height:auto !important;
+    margin:0 auto !important;
+    padding:0 !important;
+    background:transparent !important;
+    border:0 !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+    filter:none !important;
+}
+
+/* Larger, clearer existing-account login prompt. */
+.kq-account-login {
+    margin:22px 0 4px !important;
+    text-align:center !important;
+    font-size:18px !important;
+    line-height:1.5 !important;
+    font-weight:700 !important;
+    color:#172033 !important;
+}
+
+.kq-account-login a {
+    color:#176b4d !important;
+    font-size:19px !important;
+    font-weight:900 !important;
+    text-decoration:underline !important;
+    text-underline-offset:3px !important;
+}
+
+.kq-account-login a:hover {
+    color:#0b4d37 !important;
+}
+
+@media (max-width:720px) {
+    body.kq-enhanced .topbar .logo .kq-page-brand img,
+    body.kq-enhanced .topbar .logo .kq-brand-logo {
+        width:140px !important;
+    }
+    .kq-drawer-head .kq-brand-logo {
+        width:190px !important;
+    }
+    .kq-account-login {
+        font-size:17px !important;
+    }
+    .kq-account-login a {
+        font-size:18px !important;
+    }
+}
+</style>
+
 </head>
 
 
@@ -869,7 +941,7 @@ body.kq-enhanced .topbar .logo .kq-page-brand img{display:block!important;width:
 
 
 
-            <p class="hint" style="margin-top:18px">Already registered? <a href="page02a-farmer-login.html" style="color:#176b4d;font-weight:700">Log in</a></p>
+            <p class="kq-account-login">Already have an account? <a href="page02a-farmer-login.html">Log in</a></p>
 
 
             <div class="actions">
