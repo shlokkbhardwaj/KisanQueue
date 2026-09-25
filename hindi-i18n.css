@@ -22,3 +22,55 @@ body > .language-switcher,
     right: 16px;
     z-index: 9999;
 }
+/* ===== Compact Language Button ===== */
+
+.kq-i18n-control {
+    position: fixed !important;
+    left: 18px !important;
+    bottom: 18px !important;
+    top: auto !important;
+    right: auto !important;
+
+    width: 44px !important;
+    height: 44px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    background: #ffffff !important;
+    border: 1px solid #d8d8d8 !important;
+    border-radius: 50% !important;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18) !important;
+
+    z-index: 99999 !important;
+
+    cursor: pointer;
+}
+
+/* Hide the select itself */
+.kq-i18n-control select {
+    position: absolute !important;
+    width: 44px !important;
+    height: 44px !important;
+
+    opacity: 0 !important;
+    cursor: pointer !important;
+}
+
+/* Globe icon */
+.kq-i18n-control::before {
+    content: "🌐";
+    font-size: 22px;
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* Remove old positioning */
+body > .kq-i18n-control {
+    top: auto !important;
+    right: auto !important;
+    left: 18px !important;
+    bottom: 18px !important;
+}
