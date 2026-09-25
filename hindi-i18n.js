@@ -140,22 +140,89 @@
     attachControl();
     apply(localStorage.getItem(KEY) || 'en');
 
-    var mo = new MutationObserver(function (mutations) {
-      var lang = localStorage.getItem(KEY) || 'en';
-      var added = [];
-      mutations.forEach(function (m) {
-        m.addedNodes.forEach(function (n) {
-          if (n.nodeType === 1 && !n.classList.contains('kq-i18n-control')) { capture(n, lang); added.push(n); }
-        });
-      });
-      if (!added.length || scheduled) return;
-      scheduled = true;
-      requestAnimationFrame(function () {
-        scheduled = false;
-        added.forEach(function (n) { translateRoot(n, lang); });
-      });
+   var mo = new MutationObserver(function (mutations) {
+  var lang = localStorage.getItem(KEY) || 'en';
+  var added = [];
+  var changed = [];
+
+  mutations.forEach(function (m) {
+
+    // Newly added elements
+    m.addedNodes.forEach(function (n) {
+      if (
+        n.nodeType === Node.ELEMENT_NODE &&
+        !n.classList.contains('kq-i18n-control')
+      ) {
+        capture(n, lang);
+        added.push(n);
+      }
+
+      // IMPORTANT:
+      // textContent changes create TEXT_NODEs (nodeType 3)
+      if (n.nodeType === Node.TEXT_NODE) {
+        var parent = n.parentElement;
+
+        if (
+          parent &&
+          !parent.closest('.kq-i18n-control')
+        ) {
+          changed.push(parent);
+        }
+      }
     });
-    mo.observe(document.body, { childList: true, subtree: true });
+
+    // IMPORTANT:
+    // Detect element.textContent / node.nodeValue changes
+    if (m.type === 'characterData') {
+      var parent = m.target.parentElement;
+
+      if (
+        parent &&
+        !parent.closest('.kq-i18n-control')
+      ) {
+        changed.push(parent);
+      }
+    }
+
+    // Detect placeholder/title/aria-label changes
+    if (m.type === 'attributes') {
+      if (
+        m.target &&
+        !m.target.closest('.kq-i18n-control')
+      ) {
+        changed.push(m.target);
+      }
+    }
+  });
+
+  if ((!added.length && !changed.length) || scheduled) return;
+
+  scheduled = true;
+
+  requestAnimationFrame(function () {
+    scheduled = false;
+
+    added.forEach(function (n) {
+      translateRoot(n, lang);
+    });
+
+    changed.forEach(function (el) {
+      translateRoot(el, lang);
+    });
+  });
+});
+
+mo.observe(document.body, {
+  childList: true,
+  subtree: true,
+  characterData: true,
+  attributes: true,
+  attributeFilter: [
+    'placeholder',
+    'title',
+    'aria-label'
+  ]
+});
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
